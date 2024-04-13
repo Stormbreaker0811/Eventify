@@ -50,7 +50,7 @@ app.post('/register' , (req,res) => {
 })
 
 app.get('/', (req,res) => {
-    res.status(400).send("Hello World!");
+    res.status(200).send("Hello World!");
     console.log("GET is working");
 });
 
