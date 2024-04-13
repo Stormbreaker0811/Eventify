@@ -44,7 +44,10 @@ app.post('/register' , (req,res) => {
         Age: age,
         Gender: gender,
         Location: location
-    }).save();
+    });
+    user_data.save().then(() => {
+        console.log("User Data Inserted..//");
+    }).catch((error) => console.log(error));
 
     return res.status(200).send("Registration Success..//");
 })
