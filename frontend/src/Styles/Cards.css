@@ -11,6 +11,7 @@
     text-align: left;
     background-color: #9C8989;
     display: inline-block;
+
 }
 .card .img{
     height: 280px;
@@ -29,4 +30,8 @@
     font-size: 12px;
     margin-left: 20px;
     margin-top: -13px;
+}
+.card .desc{
+    text-decoration: none;
+    color: black;
 }

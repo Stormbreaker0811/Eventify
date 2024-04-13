@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-import React from 'react';
+//<<<<<<< HEAD
+//import React from 'react';
 import Navbar from '../Components/Navbar'
-=======
+//=======
 import React, { useState } from 'react';
-import Navbar from '../Components/Navbar';
->>>>>>> 507ff97 (Cards Added)
+//>>>>>>> 507ff97 (Cards Added)
 import '../Styles/MoviesPage.css';
 import Cards from '../Components/Cards';
 
