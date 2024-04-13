@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const db = require('mongoose');
+const navigator = require('navigator');
 
 const app = express();
 dotenv.config();
@@ -15,6 +16,38 @@ db.connect(db_uri).then( () => {
 }).catch( (err) => {
     console.error(err);
 });
+
+const user = new db.Schema({
+    Name: String,
+    Email: String,
+    Mobile: String,
+    Age: Number,
+    Gender: String,
+    Location: String
+})
+
+const User = db.model('User',user);
+
+
+app.post('/register' , (req,res) => {
+    let data = req.body;
+    const name = data.name;
+    const email = data.email;
+    const mobile = data.mobile;
+    const age = data.age;
+    const gender = data.gender;
+    const location = data.location
+    const user_data = new User({
+        Name: name,
+        Email: email,
+        Mobile: mobile,
+        Age: age,
+        Gender: gender,
+        Location: location
+    }).save();
+
+    return res.status(200).send("Registration Success..//");
+})
 
 app.get('/', (req,res) => {
     res.status(400).send("Hello World!");
