@@ -1,0 +1,37 @@
+.card{
+    border: 1px solid hsl(0, 0%, 80%);
+    height: 350px;
+    border-radius: 10px;
+    width:200px;
+    /*box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);*/
+    margin: 10px;
+    margin-left: 50px;
+    max-width: 250px;
+    padding: 0px;
+    text-align: left;
+    background-color: #9C8989;
+    display: inline-block;
+
+}
+.card .img{
+    height: 280px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.card .title{
+    font-size: 18px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.card .category{
+    color: #555050;
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: -13px;
+}
+.card .desc{
+    text-decoration: none;
+    color: black;
+}
