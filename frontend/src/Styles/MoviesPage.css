@@ -4,13 +4,83 @@
   
   .content {
     padding: 20px;
-    margin-top: 60px; /* Adjust margin top to make space for the navbar */
   }
   
   .Header {
-    position: absolute;
-    top: 80%; /* Position the header vertically in the middle */
-    left: 7%; /* Position the header horizontally in the middle */
-    transform: translate(-50%, -50%); /* Center the header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
+  .movies-title {
+    margin-right: auto;
+  }
+  
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-btn {
+    background-color: #D3CFCF;
+    color: #333;
+    padding: 8px 12px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    top: 100%;
+  }
+  
+  .dropdown-content a {
+    color: #333;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .lang-content,
+.genre-content,
+.location-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.lang-btn:hover + .lang-content,
+.genre-btn:hover + .genre-content,
+.location-btn:hover + .location-content {
+  display: block;
+}
+
+.lang-content a,
+.genre-content a,
+.location-content a {
+  color: #333;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.lang-content a:hover,
+.genre-content a:hover,
+.location-content a:hover {
+  background-color: #ddd;
+}
