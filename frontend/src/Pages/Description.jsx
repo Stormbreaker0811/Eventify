@@ -3,6 +3,8 @@ import Navbar from '../Components/Navbar';
 import Poster from '../Components/Poster';
 import '../Styles/Description.css';
 import Circular from '../Components/Circular';
+import Footer from '../Components/Footer';
+import { Link } from 'react-router-dom';
 
 const Description = () => {
   return (
@@ -29,6 +31,7 @@ const Description = () => {
         </div>
         <button className='trailer-button' >Watch Trailer</button>
         <button className='book-ticket-button'>Book Tickets</button>
+        <Link to='/book-ticket' className='book-ticket-button'>Book Tickets</Link>
 
       </div>
       <div className='cast'>
@@ -38,6 +41,9 @@ const Description = () => {
         </div>
       </div>
     </div>
+      <Footer/>
+    </div>
+
     
   )
 }

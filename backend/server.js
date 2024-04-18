@@ -4,7 +4,11 @@ const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const express = require('express');
 const dotenv = require('dotenv');
 const db = require('mongoose');
+const cors = require('cors');
+const fs = require('fs');
 const navigator = require('navigator');
+const path = require('path');
+const multer = require('multer');
 
 const firebaseConfig = {
     apiKey: "AIzaSyD1lQHPRVotGok9JFb3XCSGhORUT9E_hGg",
@@ -20,6 +24,7 @@ const firebaseapp = initializeApp(firebaseConfig);
 
 const app = express();
 dotenv.config();
+app.use(cors());
 app.use(express.json());
 const auth = getAuth();
 
@@ -42,13 +47,38 @@ const user = new db.Schema({
     Age: Number,
     Gender: String,
     Location: String
+});
+
+const movies = db.Schema({
+    Movie_title: String,
+    Genre: String,
+    Language: String,
+    Movie_desc: String,
+    Poster_img: {
+        data: Buffer,
+        contentType: String
+    }
+});
+
+
+const movie = db.model("Movies",movies);
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null,'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '_' + Date.now())
+    }
 })
+
+const upload = multer({ storage: storage})
 
 const User = db.model('User',user);
 
 
 app.post('/register' , (req,res) => {
-    let data = req.body;
+    const data = req.body;
     const name = data.name;
     const email = data.email;
     const password = data.password;
@@ -74,9 +104,35 @@ app.post('/register' , (req,res) => {
         const user = userCredential.user;
         console.log(user.uid);
         const uid = user.uid;
-    })
+    });
 
     return res.status(200).send("Registration Success..//");
+});
+
+app.post('/get-movies', async (req,res,next) => {
+    try {
+        // Fetch movies from MongoDB
+        const movies = await movie.find();
+        res.json(movies);
+    } catch (error) {
+        console.error('Error fetching movies:', error);
+        res.status(500).json({ error: 'Error fetching movies' });
+    }
+});
+
+app.post('/post-movies', upload.single('poster'),(req,res,next) => {
+    const movie_data = {
+        name: req.body.name,
+        genre: req.body.genre,
+        language: req.body.language,
+        poster: {
+            data: fs.readFileSync(path.join(__dirname+"/uploads/"+req.file.filename+".png")),
+            contentType: 'image/png'
+        }
+    }
+    movie.create(movie_data).then((item) => {
+        res.status(200).send("Movie Added Successfully..//");
+    })
 })
 
 app.get('/', (req,res) => {
