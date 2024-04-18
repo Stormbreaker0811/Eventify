@@ -13,7 +13,6 @@ const Homepage = () => {
   return (
     <div>
       <Navbar />
-      <h2 className='popular-title'>Popular right now</h2>
       <div className="popular ">
         {/* Add your popular content here */}
         <div className="popular-content">
@@ -58,7 +57,7 @@ const Homepage = () => {
       <div className="standup ">
         <h2>Standup Comedy</h2>
         <SeeMore/>
-        <div className="standup-content">
+       <div className="standup-content">
           <div className="st1">Movie 1</div>
           <div className="st2">Movie 2</div>
           <div className="st3">Movie 3</div>
