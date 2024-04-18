@@ -68,6 +68,7 @@
     margin-left: 10px;
     transition: background-color 0.3s ease;
     width: fit-content; 
+    text-decoration: none;
 }
 .desc .rightside .book-ticket-button:hover {
     background-color: #9c433d;
