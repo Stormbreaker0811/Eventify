@@ -1,17 +1,23 @@
 *{
     margin: 0;
     padding: 0;
-}
-.container{
-    max-width: 100%;
+    background-image: url("");
     justify-content: center;
     align-items: center;
+}
+.container h1{
+    max-width: 100%;
+    align-items: center;
     position: relative;
+    justify-content: center;
+}
+.container .login-container{
+    display: flex;
 }
 .form-container{
     display: inline-block;
     border: 1px solid black;
 }
 .lottieAnimate{
-    width: 2rem;
+    width: 20rem;
 }

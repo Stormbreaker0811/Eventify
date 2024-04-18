@@ -84,3 +84,7 @@
 .location-content a:hover {
   background-color: #ddd;
 }
+
+@media only screen and (max-width: 1024px) {
+  
+}

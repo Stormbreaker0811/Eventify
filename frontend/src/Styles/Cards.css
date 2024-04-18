@@ -32,6 +32,7 @@
     margin-top: -13px;
 }
 .card .desc{
+    display: block;
     text-decoration: none;
     color: black;
 }

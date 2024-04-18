@@ -8,12 +8,13 @@ import samay from '../Assets/samay.jpeg';
 import Footer from '../Components/Footer';
 import SeeMore from '../Components/SeeMore';
 
+
 const Homepage = () => {
   return (
     <div>
       <Navbar />
+      <h2 className='popular-title'>Popular right now</h2>
       <div className="popular ">
-        <h2>Popular right now</h2>
         {/* Add your popular content here */}
         <div className="popular-content">
           <div className="popcard1">
@@ -31,7 +32,6 @@ const Homepage = () => {
           {/* <div className="popcard5">
             <img src={ed} className='pop2'/>
           </div> */}
-        
         </div>
       </div>
       <div className="categories">
@@ -58,7 +58,7 @@ const Homepage = () => {
       <div className="standup ">
         <h2>Standup Comedy</h2>
         <SeeMore/>
-       <div className="standup-content">
+        <div className="standup-content">
           <div className="st1">Movie 1</div>
           <div className="st2">Movie 2</div>
           <div className="st3">Movie 3</div>

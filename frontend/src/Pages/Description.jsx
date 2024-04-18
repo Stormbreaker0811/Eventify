@@ -3,9 +3,6 @@ import Navbar from '../Components/Navbar';
 import Poster from '../Components/Poster';
 import '../Styles/Description.css';
 import Circular from '../Components/Circular';
-import Footer from '../Components/Footer';
-import { Link } from 'react-router-dom';
-
 
 const Description = () => {
   return (
@@ -31,7 +28,7 @@ const Description = () => {
             <p>A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.</p>
         </div>
         <button className='trailer-button' >Watch Trailer</button>
-        <Link to='/book-ticket' className='book-ticket-button'>Book Tickets</Link>
+        <button className='book-ticket-button'>Book Tickets</button>
 
       </div>
       <div className='cast'>
@@ -40,9 +37,7 @@ const Description = () => {
             <Circular/>
         </div>
       </div>
-      <Footer/>
     </div>
-
     
   )
 }
