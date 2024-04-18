@@ -6,6 +6,8 @@ import React, { useState } from 'react';
 //>>>>>>> 507ff97 (Cards Added)
 import '../Styles/MoviesPage.css';
 import Cards from '../Components/Cards';
+import Footer from '../Components/Footer';
+
 
 const MoviesPage = () => {
   // State to manage the visibility of each dropdown menu
@@ -76,7 +78,7 @@ const MoviesPage = () => {
         
       </div>
       <Cards />
-      
+      <Footer/>
     </div>
   );
 }
