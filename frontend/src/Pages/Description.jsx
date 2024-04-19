@@ -12,7 +12,7 @@ const Description = () => {
     <div className='desc'>
       <Navbar/>
       <div className='leftside'>
-         <Poster/>
+        <Poster/>
       </div>
       <div className='rightside'>
         <div className='Title'>

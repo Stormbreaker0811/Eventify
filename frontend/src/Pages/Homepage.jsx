@@ -14,6 +14,7 @@ const Homepage = () => {
     <div>
       <Navbar />
       <div className="popular ">
+        <h2>Popular Right Now</h2>
         {/* Add your popular content here */}
         <div className="popular-content">
           <div className="popcard1">

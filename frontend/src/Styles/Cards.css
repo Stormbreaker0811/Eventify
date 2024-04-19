@@ -1,3 +1,6 @@
+.card-container{
+    display: flexbox;
+}
 .card{
     border: 1px solid hsl(0, 0%, 80%);
     height: 350px;
@@ -11,7 +14,6 @@
     text-align: left;
     background-color: #9C8989;
     display: inline-block;
-
 }
 .card .img{
     height: 280px;

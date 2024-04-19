@@ -30,6 +30,16 @@ const auth = getAuth();
 
 
 const PORT = process.env.PORT || 5000;
+const storage = multer.diskStorage({
+    destination: function (req,file,cb){
+        cb(null, 'E:/nimish/mit wpu/Final Project/event_management_system/backend/uploads');
+    },
+    filename: function (req,file,cb){
+        const ext = path.extname(file.originalname);
+        cb(null, file.fieldname + ext);
+    }
+})
+const upload = multer({ storage: storage});
 
 const db_uri = process.env.DB_URI;
 
@@ -54,25 +64,11 @@ const movies = db.Schema({
     Genre: String,
     Language: String,
     Movie_desc: String,
-    Poster_img: {
-        data: Buffer,
-        contentType: String
-    }
+    Poster_img: String
 });
 
 
 const movie = db.model("Movies",movies);
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null,'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '_' + Date.now())
-    }
-})
-
-const upload = multer({ storage: storage})
 
 const User = db.model('User',user);
 
@@ -109,7 +105,7 @@ app.post('/register' , (req,res) => {
     return res.status(200).send("Registration Success..//");
 });
 
-app.post('/get-movies', async (req,res,next) => {
+app.post('/get-movies', async (req,res) => {
     try {
         // Fetch movies from MongoDB
         const movies = await movie.find();
@@ -121,18 +117,50 @@ app.post('/get-movies', async (req,res,next) => {
 });
 
 app.post('/post-movies', upload.single('poster'),(req,res,next) => {
-    const movie_data = {
-        name: req.body.name,
-        genre: req.body.genre,
-        language: req.body.language,
-        poster: {
-            data: fs.readFileSync(path.join(__dirname+"/uploads/"+req.file.filename+".png")),
-            contentType: 'image/png'
-        }
+    if(!req.file){
+        return res.status(400).json({error:"No File Uploaded..//"})
     }
-    movie.create(movie_data).then((item) => {
-        res.status(200).send("Movie Added Successfully..//");
-    })
+    const filePath = req.file.path.replace(/\\/g, "/");
+    const movie_data = {
+        Movie_title: req.body.movie_title,
+        Genre: req.body.genre,
+        Language: req.body.language,
+        Poster_img: filePath
+    };
+    console.log(movie_data);
+    movie.create(movie_data)
+    .then(() => {
+        res.status(200).send("Movie Added SuccessFully..//");
+    }).catch(() => {
+        console.error("Error adding movie: "+error);
+        res.status(500).send('Error Adding Movie..//')
+    });
+});
+
+app.post('/login', async (req,res) => {
+    const formData = req.body;
+    console.log(formData)
+    const email =  formData.email;
+    const password =  formData.password;
+    const mobile = formData.mobile;
+    if(mobile === null || mobile === ""){
+        const user_data = await User.findOne({Email: email,Password : password});
+        console.log(user_data)
+        if(user_data){
+            res.status(200).send(true);
+        }else{
+            res.status(400).send(false);
+        }
+    }else if (mobile === undefined || email === undefined){
+        return res.status(400).send(false)
+        }else{
+            const user_data = await User.findOne({Mobile: mobile,Password: password});
+            if(user_data){
+                res.status(200).send(true);
+            }else{
+                res.status(400).send(false);
+            }
+        }
 })
 
 app.get('/', (req,res) => {

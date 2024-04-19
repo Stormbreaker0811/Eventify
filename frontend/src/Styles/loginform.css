@@ -1,23 +1,106 @@
 *{
     margin: 0;
     padding: 0;
-    background-image: url("");
     justify-content: center;
     align-items: center;
 }
-.container h1{
-    max-width: 100%;
+.container{
+    display: flex; /* Maintain flexbox for potential future layout changes */
+    flex-direction: column;
     align-items: center;
-    position: relative;
     justify-content: center;
+    height: 100vh;
 }
-.container .login-container{
+.login-container{
     display: flex;
+    width: 400px; /* Adjust width as needed */
+    background-color: #fff;
+    border-radius: 5px;
 }
 .form-container{
-    display: inline-block;
-    border: 1px solid black;
+    flex: 1; /* Maintain flex grow for the form to fill remaining space */
+    padding: 5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    justify-content: center;
+    text-align: center;
 }
 .lottieAnimate{
+    flex: none;
     width: 20rem;
+    padding: 20px;
+}
+
+.button{
+    display: flex;
+    max-width: 100%;
+}
+
+button{
+    top: 0;
+    margin: 1rem;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 2rem;
+    /* padding: 40px; */
+    margin-bottom: 2rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #333;
+    border: 1px #16B364;
+    transition: all 0.2s ease-in-out;
+}
+
+button:active{
+    background-color: #16B364;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #16B364;
+    color: #fff;
+}
+
+.active{
+    background-color: #16B364;
+    color: #fff;
+}
+
+.not-active{
+    background-color: #ffffff;
+    color: #333;
+    border: solid 1px #16B364;
+}
+
+.password{
+    margin-left: 1rem;
+    padding: 0.5rem;
+}
+
+.email{
+    padding: 0.5rem;
+}
+
+.form{
+    display: flex;
+}
+
+
+.login-btn{
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #000;
+    border-radius: 10%;
+    background-color: #ffffff;
+    border: solid 1px #16B364;
+}
+.login-btn:hover{
+    background-color: #16B364;
+    color: #fff;
+    transition: all ease-in 0.2s;
 }
