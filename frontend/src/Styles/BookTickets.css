@@ -44,8 +44,8 @@
 
 
 .gold-counter {
-    display: flex; /* Use flexbox to arrange items horizontally */
-    align-items: center; /* Align items vertically centered */
+    display: flex; 
+    align-items: center; 
     padding-left: 15%;
   }
   
@@ -56,7 +56,7 @@
   }
   
   .gold-counter p {
-    margin: 0 10px; /* Add margin between the buttons and the number */
+    margin: 0 10px; 
     font-size: 0.8rem;
   }
 
@@ -68,8 +68,8 @@
 
 
 .premium-counter {
-    display: flex; /* Use flexbox to arrange items horizontally */
-    align-items: center; /* Align items vertically centered */
+    display: flex; 
+    align-items: center; 
     padding-left: 15%;
   }
   
@@ -80,7 +80,7 @@
   }
   
   .premium-counter p {
-    margin: 0 10px; /* Add margin between the buttons and the number */
+    margin: 0 10px; 
     font-size: 0.8rem;
   }
   
