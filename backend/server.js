@@ -4,7 +4,11 @@ const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const express = require('express');
 const dotenv = require('dotenv');
 const db = require('mongoose');
+const cors = require('cors');
+const fs = require('fs');
 const navigator = require('navigator');
+const path = require('path');
+const multer = require('multer');
 
 const firebaseConfig = {
     apiKey: "AIzaSyD1lQHPRVotGok9JFb3XCSGhORUT9E_hGg",
@@ -20,11 +24,22 @@ const firebaseapp = initializeApp(firebaseConfig);
 
 const app = express();
 dotenv.config();
+app.use(cors());
 app.use(express.json());
 const auth = getAuth();
 
 
 const PORT = process.env.PORT || 5000;
+const storage = multer.diskStorage({
+    destination: function (req,file,cb){
+        cb(null, 'E:/nimish/mit wpu/Final Project/event_management_system/backend/uploads');
+    },
+    filename: function (req,file,cb){
+        const ext = path.extname(file.originalname);
+        cb(null, file.fieldname + ext);
+    }
+})
+const upload = multer({ storage: storage});
 
 const db_uri = process.env.DB_URI;
 
@@ -42,13 +57,24 @@ const user = new db.Schema({
     Age: Number,
     Gender: String,
     Location: String
-})
+});
+
+const movies = db.Schema({
+    Movie_title: String,
+    Genre: String,
+    Language: String,
+    Movie_desc: String,
+    Poster_img: String
+});
+
+
+const movie = db.model("Movies",movies);
 
 const User = db.model('User',user);
 
 
 app.post('/register' , (req,res) => {
-    let data = req.body;
+    const data = req.body;
     const name = data.name;
     const email = data.email;
     const password = data.password;
@@ -74,9 +100,67 @@ app.post('/register' , (req,res) => {
         const user = userCredential.user;
         console.log(user.uid);
         const uid = user.uid;
-    })
+    });
 
     return res.status(200).send("Registration Success..//");
+});
+
+app.post('/get-movies', async (req,res) => {
+    try {
+        // Fetch movies from MongoDB
+        const movies = await movie.find();
+        res.json(movies);
+    } catch (error) {
+        console.error('Error fetching movies:', error);
+        res.status(500).json({ error: 'Error fetching movies' });
+    }
+});
+
+app.post('/post-movies', upload.single('poster'),(req,res,next) => {
+    if(!req.file){
+        return res.status(400).json({error:"No File Uploaded..//"})
+    }
+    const filePath = req.file.path.replace(/\\/g, "/");
+    const movie_data = {
+        Movie_title: req.body.movie_title,
+        Genre: req.body.genre,
+        Language: req.body.language,
+        Poster_img: filePath
+    };
+    console.log(movie_data);
+    movie.create(movie_data)
+    .then(() => {
+        res.status(200).send("Movie Added SuccessFully..//");
+    }).catch(() => {
+        console.error("Error adding movie: "+error);
+        res.status(500).send('Error Adding Movie..//')
+    });
+});
+
+app.post('/login', async (req,res) => {
+    const formData = req.body;
+    console.log(formData)
+    const email =  formData.email;
+    const password =  formData.password;
+    const mobile = formData.mobile;
+    if(mobile === null || mobile === ""){
+        const user_data = await User.findOne({Email: email,Password : password});
+        console.log(user_data)
+        if(user_data){
+            res.status(200).send(true);
+        }else{
+            res.status(400).send(false);
+        }
+    }else if (mobile === undefined || email === undefined){
+        return res.status(400).send(false)
+        }else{
+            const user_data = await User.findOne({Mobile: mobile,Password: password});
+            if(user_data){
+                res.status(200).send(true);
+            }else{
+                res.status(400).send(false);
+            }
+        }
 })
 
 app.get('/', (req,res) => {
