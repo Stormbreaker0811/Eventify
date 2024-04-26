@@ -31,9 +31,8 @@ import React from 'react';
 import '../Styles/Navbar.css';
 import Logo from '../Assets/Logo.png';
 import { Link } from 'react-router-dom';
-import searchbar from './Searchbar';
-import MenuIcon from '../Assets/menu.png';
 import Searchbar from './Searchbar';
+import MenuIcon from '../Assets/menu.png';
 
 const Navbar = () => {
   return (

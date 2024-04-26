@@ -22,7 +22,7 @@ import React, { useState } from 'react';
 import '../Styles/searchbar.css';
 import searchIcon from '../Assets/searchicon.png';
 
-const SearchBar = () => {
+const Searchbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -78,4 +78,4 @@ const SearchBar = () => {
   );
 }
 
-export default SearchBar;
+export default Searchbar;

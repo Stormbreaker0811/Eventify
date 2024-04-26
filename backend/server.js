@@ -3,6 +3,7 @@ const {getAnalytics} = require('firebase/analytics');
 const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const express = require('express');
 const dotenv = require('dotenv');
+const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage');
 const db = require('mongoose');
 const cors = require('cors');
 const fs = require('fs');
@@ -30,6 +31,7 @@ const auth = getAuth();
 
 
 const PORT = process.env.PORT || 5000;
+const filePath = "";
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null, 'E:/nimish/mit wpu/Final Project/event_management_system/backend/uploads');
@@ -117,10 +119,6 @@ app.post('/get-movies', async (req,res) => {
 });
 
 app.post('/post-movies', upload.single('poster'),(req,res,next) => {
-    if(!req.file){
-        return res.status(400).json({error:"No File Uploaded..//"})
-    }
-    const filePath = req.file.path.replace(/\\/g, "/");
     const movie_data = {
         Movie_title: req.body.movie_title,
         Genre: req.body.genre,
@@ -133,7 +131,7 @@ app.post('/post-movies', upload.single('poster'),(req,res,next) => {
         res.status(200).send("Movie Added SuccessFully..//");
     }).catch(() => {
         console.error("Error adding movie: "+error);
-        res.status(500).send('Error Adding Movie..//')
+        res.status(500).send('Error Adding Movie..//');
     });
 });
 
@@ -161,7 +159,27 @@ app.post('/login', async (req,res) => {
                 res.status(400).send(false);
             }
         }
-})
+});
+
+app.post('/posters', async (req,res) => {
+    const storage = getStorage();
+    const data = req.body;
+    const file = data.poster;
+    const storageRef = ref(storage, 'Movie Posters/');
+    uploadBytes(storageRef,file).then((snapshot) => {
+        console.log("File Uploaded Successfully")
+        res.status(200).send("File Upload Success..//");
+        getDownloadURL(storageRef).then((downloadURL) => {
+            console.log("File Available at: "+downloadURL)
+            filePath = downloadURL;
+        }).catch((err) => {
+            console.error(err);
+            res.status(400).send(err);
+        })
+    }).catch((err) => {
+        console.error(err);
+    })
+});
 
 app.get('/', (req,res) => {
     res.status(200).send("Hello World!");

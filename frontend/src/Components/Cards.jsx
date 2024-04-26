@@ -18,13 +18,6 @@ const Cards = () => {
       });
   }, []);
 
-  const arrayBufferToBase64 = (buffer) => {
-    const bytes = new Uint8Array(buffer);
-    let binary = '';
-    bytes.forEach(byte => binary += String.fromCharCode(byte));
-    return window.btoa(binary);
-  }
-
   console.log(movies)
 
   return (
