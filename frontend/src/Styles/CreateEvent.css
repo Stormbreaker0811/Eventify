@@ -11,6 +11,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-weight: 500;
     margin-bottom: 50px;
+    
+    z-index: 9999; /* Ensure the overlay is above other content */
 }
 
 .ce-container input[type="text"]{

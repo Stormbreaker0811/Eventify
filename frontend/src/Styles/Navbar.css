@@ -78,7 +78,7 @@
   
   /* Add some gap between the links */
   .nav-link:not(:last-child) {
-    margin-right: 20px;
+    margin-right: 80px;
   }
   
   .menu-icon {
@@ -87,7 +87,6 @@
     cursor: pointer;
   }
   
-  /* SearchBar.css (Assuming it's a separate component) */
   
   .search-bar {
     margin-left: 20px;
@@ -115,3 +114,43 @@
     background-color: #0056b3;
   }
   
+
+
+.menu-container {
+  position: relative;
+}
+
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  height: fit-content;
+  right: 0;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  gap: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow: auto;
+}
+
+.dropdown-link {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.dropdown-link:hover {
+  background-color: #d9d6d6;
+  border-radius: 10px;
+}

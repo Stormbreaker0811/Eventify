@@ -29,7 +29,7 @@ app.use(express.json());
 const auth = getAuth();
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null, 'E:/nimish/mit wpu/Final Project/event_management_system/backend/uploads');
@@ -59,6 +59,15 @@ const user = new db.Schema({
     Location: String
 });
 
+const standup = new db.Schema({
+    date: String,
+    poster: String,
+    standup_city: String,
+    standup_name: String,
+    standup_price: String,
+    standup_venue: String
+})
+
 const movies = db.Schema({
     Movie_title: String,
     Genre: String,
@@ -71,6 +80,30 @@ const movies = db.Schema({
 const movie = db.model("Movies",movies);
 
 const User = db.model('User',user);
+
+const Standup = db.model('Standup',standup);
+
+
+app.post('/add-standup',(req,res) => {
+    const data = req.body;
+    const standup_data = {
+        date: data.date,
+        poster: data.poster,
+        standup_city: data.city,
+        standup_name: data.name,
+        standup_price: data.price,
+        standup_venue: data.venue
+    }
+    console.log(standup_data);
+    Standup.create(standup_data).then(() => {
+        console.log("Standup Data Added Success..//");
+        res.status(200).send("Standup Data Addede Success..//");
+    }).catch((err) => {
+        console.error(err);
+        res.status(400).send("Error Occurred..//")
+    })
+
+})
 
 
 app.post('/register' , (req,res) => {
@@ -115,6 +148,17 @@ app.post('/get-movies', async (req,res) => {
         res.status(500).json({ error: 'Error fetching movies' });
     }
 });
+
+app.post('/get-standup', async (req,res) => {
+    try{
+        const standup = await Standup.find();
+        res.json(standup);
+    }catch(err){
+        console.error(err);
+    }
+})
+
+
 
 app.post('/post-movies', upload.single('poster'),(req,res,next) => {
     if(!req.file){

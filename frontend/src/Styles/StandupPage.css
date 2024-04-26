@@ -1,0 +1,89 @@
+.header{
+    padding: 3%;
+    display: flex;
+}
+
+.city-dropdown {
+    margin-top: 20px;
+    margin-left: 600px;
+  }
+  
+  .city-dropdown label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .city-dropdown select {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .city-dropdown select:focus {
+    border-color: #007bff;
+  }
+  
+  /* Style the dropdown arrow */
+  .city-dropdown select::-ms-expand {
+    display: none;
+  }
+  
+  .city-dropdown select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 9 12 15 18 9"></polygon></svg>') no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px 12px;
+  }
+  
+.standup-shows{
+  display: flex;
+}
+
+.standup-shows .show{
+    height: 400px;
+    width: 250px;
+    background-color: rgb(181, 142, 142);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(119, 116, 116, 0.1);
+    margin-left: 80px;
+}
+
+.standup-shows .show .poster .img-poster{
+    height: 300px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.standup-shows .show .show-name{
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+.standup-shows .show .show-venue{
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 20px;
+    margin-top: -5px;
+
+}
+
+.standup-shows .show .date{
+    margin-left: 20px;
+    margin-top: -5px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.standup-shows .show .price{
+    margin-left: 180px;
+    margin-top: -40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 800;
+}
