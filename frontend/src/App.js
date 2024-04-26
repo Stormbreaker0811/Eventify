@@ -13,6 +13,7 @@ import SeeMore from './Components/SeeMore';
 import Aboutus from './Pages/Aboutus';
 import YourOrders from './Pages/YourOrders';
 import CreateEvent from './Pages/CreateEvent';
+import StandupPage from './Pages/StandupPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/payment' element={<Payment/>} />
           <Route path='/home' element={<Homepage/>}/>
           <Route path='/movies' element={<MoviesPage/>} />
+          <Route path='/standup' element={<StandupPage/>}/>
           <Route path='/about' element={<Aboutus/>}/>
           <Route path='orders' element={<YourOrders/>}/>
           <Route path='add-event' element={<CreateEvent/>}/>

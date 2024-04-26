@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Cards = () => {
-  axios.defaults.baseURL = "http://localhost:5000";
+  axios.defaults.baseURL = "http://localhost:4000";
 
   const [movies, setMovies] = useState([]);
 

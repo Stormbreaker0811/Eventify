@@ -1,23 +1,3 @@
-// import React from 'react'
-// import '../Styles/searchbar.css';
-// import searchicon from '../Assets/searchicon.png';
-
-// const Searchbar = () => {
-//   return (
-//     <div className='sb'>
-//       <div className = "input-wrapper">
-       
-//         <img src = {searchicon} className='search-icon' alt = ''/>
-//         <input placeholder='search movies'/>
-      
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Searchbar
-
-
 import React, { useState } from 'react';
 import '../Styles/searchbar.css';
 import searchIcon from '../Assets/searchicon.png';
