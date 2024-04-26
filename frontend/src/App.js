@@ -10,6 +10,9 @@ import BookTickets from './Pages/BookTickets';
 import Payment from './Pages/Payment';
 import Homepage from './Pages/Homepage';
 import SeeMore from './Components/SeeMore';
+import Aboutus from './Pages/Aboutus';
+import YourOrders from './Pages/YourOrders';
+import CreateEvent from './Pages/CreateEvent';
 
 function App() {
   return (
@@ -18,13 +21,16 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />}/>
           <Route path="/movies" element = {<MoviesPage/>}  />
-          <Route path="/login" element = {<Login/>} />
+          <Route path="/login" element = {<Login/>} />cd ..
           <Route path="/signup" element = {<SignUp/>} />
           <Route path='/movies-desc' element={<Description />}/>
           <Route path='/book-ticket' element={<BookTickets/>}/>
           <Route path='/payment' element={<Payment/>} />
           <Route path='/home' element={<Homepage/>}/>
           <Route path='/movies' element={<MoviesPage/>} />
+          <Route path='/about' element={<Aboutus/>}/>
+          <Route path='orders' element={<YourOrders/>}/>
+          <Route path='add-event' element={<CreateEvent/>}/>
         </Routes>
       </BrowserRouter>
     </div>

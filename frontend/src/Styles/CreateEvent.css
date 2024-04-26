@@ -1,0 +1,50 @@
+.ce-container{
+    height: fit-content;
+    width: 600px;
+    border-radius: 10px;
+    border-color: black;
+    margin-left: 380px;
+    padding: 3%;
+    margin-top: 50px;
+    background-color: wheat;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    margin-bottom: 50px;
+}
+
+.ce-container input[type="text"]{
+    background-color: rgb(68, 65, 65);
+    padding: 8px;
+    border-radius: 10px;
+    height: 25px;
+    font-size: 12px;
+    outline: none;
+    font-size: 15px;
+    color: white;
+}
+
+.ce-container .dtd{
+    display: flex;
+    gap: 120px;
+}
+
+.ce-container .dtd .date .DP{
+    width: 100px;
+}
+
+.ce-container .dtd .time .TM{
+    border-color: black;
+}
+
+.ce-container .nxtbtn{
+    height: fit-content;
+    width: fit-content;
+    padding: 2%;
+    margin-top: 30px;
+    margin-left: 230px;
+    background-color: rgb(193, 174, 215);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}

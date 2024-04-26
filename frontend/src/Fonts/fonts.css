@@ -1,0 +1,7 @@
+/* fonts.css */
+@font-face {
+    font-family: 'Poppins';
+    src: url('./Fonts/Poppins') format('truetype');
+    /* Add more src for different font weights and styles if available */
+  }
+  

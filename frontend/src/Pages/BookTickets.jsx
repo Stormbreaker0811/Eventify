@@ -1,97 +1,85 @@
-// import React,{useState} from 'react'
-// import '../Styles/BookTickets.css';
-// import Navbar from '../Components/Navbar';
-// import Poster from '../Components/Poster';
-
-
-// const BookTickets = (id) => {
-//   return (
-//     <div>
-//       <Navbar/>
-//       <div className='ticket-info'>
-//       <Poster className = "bkposter"/>
-//         <div className='event-info'>
-//           <h2 className='bkfor'>Book Tickets for Inception</h2>
-//           <h4 className='bkdate'>Date : Sunday, 21st April 2024</h4>
-
-//           <h4 className='venue'>Venue : PVR Pavillion</h4>
-//           <div className='counter'>
-//             <button onClick={() => updateQuantity(id, -1)}>-</button>
-//             <p>{number}</p>
-//             <button onClick={() => updateQuantity(id, 1)}>+</button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// const [number, setNumber] = useState(1); 
-
-// 	const updateQuantity = (id, value) => {
-// 			uniqueItemsInCart.map((item) => item.id === id) &&
-// 			setNumber((prevState) => prevState + value);
-// 	};
-
-
-// export default BookTickets
-
-
 import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
-import Poster from '../Components/Poster';
 import '../Styles/BookTickets.css';
 import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
+import inception from '../Assets/inception.jpg';
 
 const BookTickets = () => {
-  const [numberGold, setNumberGold] = useState(1); 
+  const [ticketData, setTicketData] = useState([
+    {
+      id: 1,
+      eventName: 'Inception',
+      eventDate: 'Sunday, 21st April 2024',
+      venue: 'PVR Pavillion',
+      categories: [
+        { id: 1, name: 'Gold', price: 699 },
+        { id: 2, name: 'Premium', price: 999 }
+      ],
+      poster: inception
+    },
+    // Add more events as needed
+  ]);
 
-  const updateQuantityGold = (value) => {
-    setNumberGold((prevState) => prevState + value);
+  const [ticketQuantities, setTicketQuantities] = useState({});
+  const [cart, setCart] = useState({ Gold: 0, Premium: 0 });
 
+  const updateQuantity = (eventId, categoryId, value) => {
+    setTicketQuantities(prevState => ({
+      ...prevState,
+      [eventId]: {
+        ...prevState[eventId],
+        [categoryId]: Math.max((prevState[eventId]?.[categoryId] || 0) + value, 0)
+      }
+    }));
+  
+    const category = ticketData.find(event => event.id === eventId)?.categories.find(cat => cat.id === categoryId);
+    if (category) {
+      setCart(prevCart => {
+        const newCartValue = prevCart[category.name] + (category.price * value);
+        return {
+          ...prevCart,
+          [category.name]: Math.max(newCartValue, 0)
+        };
+      });
+    }
   };
-
-  const [numberPremium, setNumberPremium] = useState(1); 
-
-  const updateQuantityPremium = (value) => {
-    setNumberPremium((prevState) => prevState + value);
-  };
+  
 
   return (
     <div>
-      <Navbar/>
-      <div className='ticket-info'>
-        <Poster className='bkposter' />
-        <div className='event-info'>
-          <h2 className='bkfor'>Book Tickets for Inception</h2>
-          <h4 className='bkdate'>Date : Sunday, 21st April 2024</h4>
-          <h4 className='venue'>Venue : PVR Pavillion</h4>
-          <div className='category'>
-            <h3>Category</h3>
-            <div className="category-gold">
-              <h4>Gold (Rs. 699)</h4>
-              <div className='gold-counter'>
-                <button onClick={() => updateQuantityGold(-1)}>-</button>
-                <p>{numberGold}</p>
-                <button onClick={() => updateQuantityGold(1)}>+</button>
-              </div>
-            </div>
-            <div className="category-premium">
-              <h4>Premium (Rs. 999)</h4>
-              <div className='premium-counter'>
-                <button onClick={() => updateQuantityPremium(-1)}>-</button>
-                <p>{numberPremium}</p>
-                <button onClick={() => updateQuantityPremium(1)}>+</button>
-              </div>
-            </div>
-            <Link to="/payment" className='payment-button'>Proceed to Payment</Link>
-          </div>  
-          
-        </div>
-        
+      <Navbar />
+      <div className='cart'>
+        <h3>Cart</h3>
+        <p>Total: Rs. {cart.Gold + cart.Premium}</p>
       </div>
-      <Footer/>
+      {ticketData.map(event => (
+        <div key={event.id} className='ticket-info'>
+          <div className='event-poster'>
+            <img src={event.poster} alt={event.eventName} />
+          </div>
+          <div className='event-info'>
+            <h2 className='bkfor'>Book Tickets for {event.eventName}</h2>
+            <h4 className='bkdate'>Date: {event.eventDate}</h4>
+            <h4 className='venue'>Venue: {event.venue}</h4>
+            <div className='category'>
+              <h3>Category</h3>
+              {event.categories.map(category => (
+                <div key={category.id} className="category-item">
+                  <h4>{category.name} (Rs. {category.price})</h4>
+                  <div className='counter'>
+                    <button onClick={() => updateQuantity(event.id, category.id, -1)}>-</button>
+                    <p>{ticketQuantities[event.id]?.[category.id] || 0}</p>
+                    <button onClick={() => updateQuantity(event.id, category.id, 1)}>+</button>
+                  </div>
+                </div>
+              ))}
+              <Link to="/payment" className='payment-button'>Proceed to Payment</Link>
+            </div>
+          </div>
+        </div>
+      ))}
+      <Footer />
     </div>
   );
 };

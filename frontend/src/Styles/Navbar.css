@@ -1,7 +1,6 @@
-.nav{
+/* .nav{
     display: flex;
     font-size: 20px;
-   /* background-color: green;*/
 }
 .nav-links{
     spacing: 50px;
@@ -13,6 +12,8 @@
     margin-top: 30px;
     margin-left: 300px;
     gap: 40px;
+    text-decoration: none;
+    color: black;
 }
 .logo-img{
     margin-top: 30px;
@@ -28,4 +29,89 @@
     height: auto;
     cursor: pointer;
     margin-top: 27px;
+  } */
+
+
+/* Navbar.css */
+
+/* Navbar.css */
+
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
   }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-link {
+    text-decoration: none;
+  }
+  
+  .logo-img {
+    width: 120px;
+    height: auto;
+    margin-left: 10px;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link {
+    margin-right: 20px;
+    color: #333;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  /* Add some gap between the links */
+  .nav-link:not(:last-child) {
+    margin-right: 20px;
+  }
+  
+  .menu-icon {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  /* SearchBar.css (Assuming it's a separate component) */
+  
+  .search-bar {
+    margin-left: 20px;
+    margin-top: -20px;
+  }
+  
+  .search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .search-button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  

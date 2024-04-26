@@ -36,12 +36,12 @@ const LoginForm = () => {
         mobile: '',
     });
 
-    const [fullName , setFullName] = useState('')
-    const [password, setPassword] = useState('');
-    const [email,setEmail] = useState('');
-    const [mobileNo,setMobileNo] = useState('');
-    const [age,setAge] = useState('');
-    const [gender,setGender] = useState('');
+    // const [fullName , setFullName] = useState('')
+    // const [password, setPassword] = useState('');
+    // const [email,setEmail] = useState('');
+    // const [mobileNo,setMobileNo] = useState('');
+    // const [age,setAge] = useState('');
+    // const [gender,setGender] = useState('');
 
     const handleSubmit = (e) => {
 

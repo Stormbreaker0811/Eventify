@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/Cards.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Cards = () => {
   axios.defaults.baseURL = "http://localhost:5000";
