@@ -14,6 +14,8 @@ import Aboutus from './Pages/Aboutus';
 import YourOrders from './Pages/YourOrders';
 import CreateEvent from './Pages/CreateEvent';
 import StandupPage from './Pages/StandupPage';
+import Theatre  from './Pages/Theatre';
+import Music from './Pages/Music';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
           <Route path='/about' element={<Aboutus/>}/>
           <Route path='orders' element={<YourOrders/>}/>
           <Route path='add-event' element={<CreateEvent/>}/>
+          <Route path='/theatre' element={<Theatre/>}/>
+          <Route path='/music' element={<Music/>}/>
         </Routes>
       </BrowserRouter>
     </div>

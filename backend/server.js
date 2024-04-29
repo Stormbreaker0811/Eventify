@@ -30,12 +30,9 @@ app.use(express.json());
 const auth = getAuth();
 
 
-<<<<<<< HEAD
-const PORT = process.env.PORT || 5000;
+
 const filePath = "";
-=======
 const PORT = process.env.PORT;
->>>>>>> 75e3f768fa1f037ebe76dd2d2f43d1f969c9990d
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null, 'E:/nimish/mit wpu/Final Project/event_management_system/backend/uploads');
@@ -74,6 +71,24 @@ const standup = new db.Schema({
     standup_venue: String
 })
 
+const theatre = new db.Schema({
+    theatre_show_name: String,
+    theatre_venue: String,
+    date: String,
+    price: String, 
+    city: String,
+    poster: String
+})
+
+const music = new db.Schema({
+    music_show_name: String,
+    music_venue: String,
+    city: String,
+    price: String,
+    date: String,
+    poster: String
+})
+
 const movies = db.Schema({
     Movie_title: String,
     Genre: String,
@@ -88,6 +103,10 @@ const movie = db.model("Movies",movies);
 const User = db.model('User',user);
 
 const Standup = db.model('Standup',standup);
+
+const Theatre = db.model('Theatre', theatre);
+
+const Music = db.model("Music", music);
 
 
 app.post('/add-standup',(req,res) => {
@@ -104,6 +123,48 @@ app.post('/add-standup',(req,res) => {
     Standup.create(standup_data).then(() => {
         console.log("Standup Data Added Success..//");
         res.status(200).send("Standup Data Addede Success..//");
+    }).catch((err) => {
+        console.error(err);
+        res.status(400).send("Error Occurred..//")
+    })
+
+})
+
+app.post('/add-theatre',(req,res) => {
+    const data = req.body;
+    const theatre_data = {
+        date: data.date,
+        poster: data.poster,
+        city: data.city,
+        theatre_show_name: data.name,
+        standup_price: data.price,
+        theatre_venue: data.venue
+    }
+    console.log(theatre_data);
+    Theatre.create(theatre_data).then(() => {
+        console.log("Theatre Data Added Success..//");
+        res.status(200).send("Theatre Data Addede Success..//");
+    }).catch((err) => {
+        console.error(err);
+        res.status(400).send("Error Occurred..//")
+    })
+
+})
+
+app.post('/add-music',(req,res) => {
+    const data = req.body;
+    const music_data = {
+        date: data.date,
+        poster: data.poster,
+        city: data.city,
+        music_show_name: data.name,
+        price: data.price,
+        music_venue: data.venue
+    }
+    console.log(music_data);
+    Theatre.create(music_data).then(() => {
+        console.log("Music Data Added Success..//");
+        res.status(200).send("Music Data Addede Success..//");
     }).catch((err) => {
         console.error(err);
         res.status(400).send("Error Occurred..//")
@@ -159,6 +220,24 @@ app.post('/get-standup', async (req,res) => {
     try{
         const standup = await Standup.find();
         res.json(standup);
+    }catch(err){
+        console.error(err);
+    }
+})
+
+app.post('/get-music', async (req,res) => {
+    try{
+        const music = await Music.find();
+        res.json(music);
+    }catch(err){
+        console.error(err);
+    }
+})
+
+app.post('/get-theatre', async (req,res) => {
+    try{
+        const theatre = await Theatre.find();
+        res.json(theatre);
     }catch(err){
         console.error(err);
     }

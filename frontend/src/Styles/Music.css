@@ -40,13 +40,13 @@
     background-size: 12px 12px;
   }
   
-.standup-shows{
+.music-shows{
   display: flex;
   flex-wrap: wrap;
   row-gap: 50px;
 }
 
-.standup-shows .show{
+.music-shows .show{
     height: 400px;
     width: 250px;
     background-color: rgb(181, 142, 142);
@@ -55,20 +55,20 @@
     margin-left: 80px;
 }
 
-.standup-shows .show .poster .img-poster{
+.music-shows .show .poster .img-poster{
     height: 300px;
     width: 250px;
     border-radius: 10px;
 }
 
-.standup-shows .show .show-name{
+.music-shows .show .show-name{
     font-size: 16px;
     font-weight: 700;
     margin-left: 20px;
     margin-top: -5px;
 }
 
-.standup-shows .show .show-venue{
+.music-shows .show .show-venue{
     font-weight: 600;
     font-size: 13px;
     margin-left: 20px;
@@ -76,14 +76,14 @@
 
 }
 
-.standup-shows .show .date{
+.music-shows .show .date{
     margin-left: 20px;
     margin-top: -5px;
     font-size: 13px;
     font-weight: 600;
 }
 
-.standup-shows .show .price{
+.music-shows .show .price{
     margin-left: 180px;
     margin-top: -40px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

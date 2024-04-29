@@ -1,22 +1,21 @@
-
 import React, { useState, useEffect } from 'react';
-import '../Styles/StandupPage.css';
+import '../Styles/Theatre.css';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import samay from '../Assets/samay.jpeg';
 import axios from 'axios';
 
-const StandupPage = () => {
+const Theatre = () => {
     axios.defaults.baseURL = "http://localhost:4000"
 
     const [selectedCity, setSelectedCity] = useState('');
-    const [standupShows, setStandupShows] = useState([]);
+    const [theatreShows, setTheatreShows] = useState([]);
 
     useEffect(() => {
-        axios.post("/get-standup")
+        axios.post("/get-theatre")
         .then((res) => {
             console.log(res.data)
-            setStandupShows(res.data);
+            setTheatreShows(res.data);
         }).catch((err) => {
             console.error(err);
         })
@@ -30,13 +29,14 @@ const StandupPage = () => {
         <div>
             <Navbar />
             <div className="header">
-                <h1>Standup shows near you !</h1>
+                <h1>Theatre plays near you !</h1>
                 <div className="city-dropdown">
                     <label htmlFor="city">Select a city:</label>
                     <select id="city" value={selectedCity} onChange={handleCityChange}>
                         <option value="">Select</option>
                         <option value="Pune">Pune</option>
                         <option value="Mumbai">Mumbai</option>
+                        <option value="Chennai">Chennai</option>
                         <option value="Chennai">Chennai</option>
                         <option value="Nashik">Nashik</option>
                         <option value="Goa">Goa</option>
@@ -46,28 +46,27 @@ const StandupPage = () => {
                         <option value="Punjab">Punjab</option>
                         <option value="Gujarat">Gujarat</option>
                         <option value="Rajasthan">Rajasthan</option>
-                        {/* Add more cities as needed */}
                     </select>
                 </div>
             </div>
 
-            <div className="standup-shows">
-                {standupShows.map((show) => (
+            <div className="theatre-shows">
+                {theatreShows.map((show) => (
                     <div className="show" key={show.id}>
                         <div className="poster">
                             <img src={show.poster} className='img-poster' alt="show poster" />
                         </div>
                         <div className="show-name">
-                            <p>{show.standup_name}</p>
+                            <p>{show.theatre_show_name}</p>
                         </div>
                         <div className="show-venue">
-                            <p>{show.standup_venue}</p>
+                            <p>{show.theatre_venue}</p>
                         </div>
                         <div className="date">
                             <p>{show.date}</p>
                         </div>
                         <div className="price">
-                            <p>{show.standup_price}</p>
+                            <p>{show.theatre_show_price}</p>
                         </div>
                     </div>
                 ))}
@@ -78,5 +77,5 @@ const StandupPage = () => {
     );
 };
 
-export default StandupPage;
+export default Theatre;
 

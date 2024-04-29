@@ -93,6 +93,11 @@ import samay from '../Assets/samay.jpeg';
 import ed from '../Assets/ed.jpg';
 import zakir from '../Assets/zakir.jpeg';
 import comedy from '../Assets/comedy.jpg';
+import { Link } from 'react-router-dom';
+import musicgraphic from '../Assets/musicgraphic.jpeg';
+import standupgraphic from '../Assets/standupgraphic.jpeg';
+import theatregraphic from '../Assets/theatregraphic.jpeg';
+
 
 const Homepage = () => {
   const popularContent = [
@@ -102,11 +107,11 @@ const Homepage = () => {
     { id: 4, image: comedy },
   ];
 
-  const standupComedyContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4', 'Movie 5'];
+  const standupComedyContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
 
-  const musicEventsContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4', 'Movie 5'];
+  const musicEventsContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
 
-  const theatreContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4', 'Movie 5'];
+  const theatreContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
 
   return (
     <div>
@@ -124,9 +129,15 @@ const Homepage = () => {
       <div className="categories">
         <h2>Categories</h2>
         <div className="categories-content">
-          <div className="cat2">Music</div>
-          <div className="cat3">Standup</div>
-          <div className="cat4">Theatre</div>
+          <Link to='/music' className="cat1">
+            <img src ={musicgraphic} className='graphic'/>
+          </Link>
+          <Link to='/standup' className="cat2">
+            <img src = {standupgraphic} className='graphic'/>
+          </Link>
+          <Link to='/theatre' className="cat3">
+            <img src = {theatregraphic} className='graphic'/>
+          </Link>
         </div>
       </div>
       <div className="standup">
