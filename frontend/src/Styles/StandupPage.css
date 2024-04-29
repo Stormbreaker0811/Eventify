@@ -62,7 +62,7 @@
 }
 
 .standup-shows .show .show-name{
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     margin-left: 20px;
     margin-top: -5px;
@@ -84,8 +84,9 @@
 }
 
 .standup-shows .show .price{
-    margin-left: 180px;
-    margin-top: -40px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-weight: 800;
+    margin-left: 130px;
+    margin-top: -30px;
+    margin-right: 20px;
+    font-weight: 600;
+    font-size: 14px;
 }

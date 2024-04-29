@@ -216,7 +216,7 @@ app.post('/get-movies', async (req,res) => {
     }
 });
 
-app.post('/get-standup', async (req,res) => {
+app.get('/get-standup', async (req,res) => {
     try{
         const standup = await Standup.find();
         res.json(standup);
@@ -224,6 +224,39 @@ app.post('/get-standup', async (req,res) => {
         console.error(err);
     }
 })
+
+app.get('/standup-homepage', async (req,res) => {
+    try{
+        const standup = await Standup.find();
+        const data = standup.slice(0,4);
+        res.json(data);
+    }catch(err){
+        console.error(err);
+    }
+})
+
+app.get('/music-homepage', async (req,res) => {
+    try{
+        const music = await Music.find();
+        const data = music.slice(0,4);
+        res.json(data);
+    }catch(err){
+        console.error(err);
+    }
+})
+
+app.get('/theatre-homepage', async (req,res) => {
+    try{
+        const theatre = await Theatre.find();
+        const data = theatre.slice(0,4);
+        res.json(data);
+    }catch(err){
+        console.error(err);
+    }
+})
+
+
+
 
 app.post('/get-music', async (req,res) => {
     try{
@@ -240,6 +273,34 @@ app.post('/get-theatre', async (req,res) => {
         res.json(theatre);
     }catch(err){
         console.error(err);
+    }
+});
+
+app.get('/get-popular', async (req,res) => {
+    try{
+    const popular_content = [];
+
+    const standup_content = await Standup.findOne({standup_name: "The Zakir Khan Show"});
+
+    if(standup_content){
+        popular_content.push(standup_content);
+    }
+
+    const theatre_content = await Theatre.findOne({theatre_show_name: "Matilda"});
+
+    const music_content = await Music.findOne({ music_show_name: "Sunburn Arena ft. Alan Walker" });
+
+    if(theatre_content){
+        popular_content.push(theatre_content);
+    }
+
+    if(music_content){
+        popular_content.push(music_content);
+    }
+    res.status(200).json(popular_content);
+    }catch(error){
+        console.error(error);
+        res.status(400).send("Error..//")
     }
 })
 

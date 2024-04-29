@@ -84,7 +84,7 @@
 // export default Homepage;
 
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
 import '../Styles/Homepage.css';
 import Footer from '../Components/Footer';
@@ -97,17 +97,68 @@ import { Link } from 'react-router-dom';
 import musicgraphic from '../Assets/musicgraphic.jpeg';
 import standupgraphic from '../Assets/standupgraphic.jpeg';
 import theatregraphic from '../Assets/theatregraphic.jpeg';
+import Carousel from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import axios from 'axios';
+
 
 
 const Homepage = () => {
-  const popularContent = [
-    { id: 1, image: samay },
-    { id: 2, image: ed },
-    { id: 3, image: zakir },
-    { id: 4, image: comedy },
-  ];
+  axios.defaults.baseURL = "http://localhost:4000";
+  // const popularContent = [
+  //   { id: 1, image: samay },
+  //   { id: 2, image: ed },
+  //   { id: 3, image: zakir },
+  //   { id: 4, image: comedy },
+  // ];
 
-  const standupComedyContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
+  const [popular,setPopular] = useState([]);
+
+  const [standup, setStandup] = useState([]);
+
+  const [music, setMusic] = useState([]);
+
+  const [theatre, setTheatre] = useState([]);
+
+  useEffect(() => {
+    axios.get('/standup-homepage').then((res) => {
+      setStandup(res.data);
+      console.log(standup);
+    }).catch((err) => {
+      console.error(err);
+    })
+  },[])
+
+  useEffect(() => {
+    axios.get('/music-homepage').then((res) => {
+      setMusic(res.data);
+      console.log(music);
+    }).catch((err) => {
+      console.error(err);
+    })
+},[])
+
+  useEffect(() => {
+    axios.get('/theatre-homepage').then((res) => {
+      setTheatre(res.data);
+      console.log(theatre);
+    }).catch((err) => {
+      console.error(err);
+    })
+  },[])
+
+  useEffect(() => {
+    axios.get('/get-popular').then((res) => {
+      setPopular(res.data);
+    }).catch((err) => {
+      console.error();
+    })
+  },[])
+
+
+
+
 
   const musicEventsContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
 
@@ -119,9 +170,9 @@ const Homepage = () => {
       <div className="popular">
         <h2>Popular Right Now</h2>
         <div className="popular-content">
-          {popularContent.map((item) => (
+          {popular.map((item) => (
             <div key={item.id} className={`popcard${item.id}`}>
-              <img src={item.image} alt={`Popular ${item.id}`} className={`pop${item.id}`} />
+              <img src={item.poster} alt={`Popular ${item.id}`} className='pop'/>
             </div>
           ))}
         </div>
@@ -144,8 +195,27 @@ const Homepage = () => {
         <h2>Standup Comedy</h2>
         <SeeMore />
         <div className="standup-content">
-          {standupComedyContent.map((item, index) => (
-            <div key={index} className={`st${index + 1}`}>{item}</div>
+          {standup.map((show) => (
+            <div key={show.id} className='st'>
+              <div className="show" key={show.id}>
+                        <div className="poster">
+                            <img src={show.poster} className='img-poster' alt="show poster" />
+                        </div>
+                        <div className="show-name">
+                            <p>{show.standup_name}</p>
+                        </div>
+                        <div className="show-venue">
+                            <p>{show.standup_venue}</p>
+                        </div>
+                        <div className="date">
+                            <p>{show.date}</p>
+                        </div>
+                        <div className="price">
+                            <p>{show.standup_price}</p>
+                        </div>
+                    </div>
+              
+            </div>
           ))}
         </div>
       </div>
@@ -153,8 +223,27 @@ const Homepage = () => {
         <h2>Music events</h2>
         <SeeMore />
         <div className="music-content">
-          {musicEventsContent.map((item, index) => (
-            <div key={index} className={`music${index + 1}`}>{item}</div>
+        {music.map((show) => (
+            <div key={show.id} className='st'>
+              <div className="show" key={show.id}>
+                        <div className="poster">
+                            <img src={show.poster} className='img-poster' alt="show poster" />
+                        </div>
+                        <div className="show-name">
+                            <p>{show.music_show_name}</p>
+                        </div>
+                        <div className="show-venue">
+                            <p>{show.music_show_venue}</p>
+                        </div>
+                        <div className="date">
+                            <p>{show.date}</p>
+                        </div>
+                        <div className="price">
+                            <p>{show.music_price}</p>
+                        </div>
+                    </div>
+              
+            </div>
           ))}
         </div>
       </div>
@@ -162,8 +251,27 @@ const Homepage = () => {
         <h2>Theatre</h2>
         <SeeMore />
         <div className="theatre-content">
-          {theatreContent.map((item, index) => (
-            <div key={index} className={`th${index + 1}`}>{item}</div>
+        {theatre.map((show) => (
+            <div key={show.id} className='st'>
+              <div className="show" key={show.id}>
+                        <div className="poster">
+                            <img src={show.poster} className='img-poster' alt="show poster" />
+                        </div>
+                        <div className="show-name">
+                            <p>{show.theatre_show_name}</p>
+                        </div>
+                        <div className="show-venue">
+                            <p>{show.theatre_venue}</p>
+                        </div>
+                        <div className="date">
+                            <p>{show.date}</p>
+                        </div>
+                        <div className="price">
+                            <p>{show.theatre_show_price}</p>
+                        </div>
+                    </div>
+              
+            </div>
           ))}
         </div>
       </div>

@@ -11,9 +11,11 @@ const StandupPage = () => {
 
     const [selectedCity, setSelectedCity] = useState('');
     const [standupShows, setStandupShows] = useState([]);
+    const [filteredData,setFilteredData] = useState([]);
+    const [renderFilter,setRenderFilter] = useState(true);
 
     useEffect(() => {
-        axios.post("/get-standup")
+        axios.get("/get-standup")
         .then((res) => {
             console.log(res.data)
             setStandupShows(res.data);
@@ -24,6 +26,12 @@ const StandupPage = () => {
 
     const handleCityChange = (event) => {
         setSelectedCity(event.target.value);
+        if(selectedCity === "Select"){
+            setFilteredData(standupShows);
+        }else{
+            const filtered = standupShows.filter(show => show.standup_city === selectedCity);
+            setFilteredData(filtered);
+        }
     };
 
     return (
@@ -34,7 +42,7 @@ const StandupPage = () => {
                 <div className="city-dropdown">
                     <label htmlFor="city">Select a city:</label>
                     <select id="city" value={selectedCity} onChange={handleCityChange}>
-                        <option value="">Select</option>
+                        <option value=""><button>Select</button></option>
                         <option value="Pune">Pune</option>
                         <option value="Mumbai">Mumbai</option>
                         <option value="Chennai">Chennai</option>
@@ -52,7 +60,7 @@ const StandupPage = () => {
             </div>
 
             <div className="standup-shows">
-                {standupShows.map((show) => (
+                {filteredData.map((show) => (
                     <div className="show" key={show.id}>
                         <div className="poster">
                             <img src={show.poster} className='img-poster' alt="show poster" />
