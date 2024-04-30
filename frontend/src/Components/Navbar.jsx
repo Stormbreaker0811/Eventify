@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Searchbar from './Searchbar';
 import MenuIcon from '../Assets/menu.png';
 import CreateEvent from '../Pages/CreateEvent'; 
+>>>>>>> 75e3f768fa1f037ebe76dd2d2f43d1f969c9990d
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

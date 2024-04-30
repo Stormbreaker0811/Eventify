@@ -12,15 +12,14 @@
 
   .popular .popular-content{
     display: inline-block;
+    display: flex;
+    gap: 20px;
 
   }
-  .popcard1, 
-  .popcard2, 
-  .popcard3, 
-  .popcard4 {
+  .pop {
     display: inline-block;
     width: 1000px;
-    height: 400px;
+    height: 500px;
     margin-right: 10px;
     background-color: #f0f0f0;
     border-radius: 10px;
@@ -77,7 +76,7 @@
   .cat3, 
   .cat4 {
     display: inline-block;
-    width: 300px;
+    width: 400px;
     height: 400px;
     margin: 0 20px;
     background-color: #f0f0f0;
@@ -85,6 +84,14 @@
     border: 1px solid hsl(0, 0%, 80%);
     justify-content: center;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .graphic{
+    height: 400px;
+    width: 400px;
+    border-radius: 10px;
   }
   
 
@@ -98,23 +105,56 @@
   .standup-content {
     display: inline-block;
     margin-top: 20px;
+    display: flex;
+    gap: 30px;
+    padding-bottom: 2%;
   }
   
-  .st1, 
-  .st2, 
-  .st3, 
-  .st4,
-  .st5 {
+  .show {
     display: inline-block;
-    width: 250px;
-    height: 350px;
+    width: 500px;
+    height: 300px;
     margin: 0 20px;
-    background-color: #f0f0f0;
+    background-color: rgb(219, 67, 67);
     border-radius: 10px;
     border: 1px solid hsl(0, 0%, 80%);
     justify-content: center;
     text-align: center;
   }
+
+  .img-poster{
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+  }
+
+  .show-name{
+    font-size: 20px;
+    font-weight: 800;
+    text-align: left;
+  }
+
+  .show-venue{
+    font-size: 17px;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .date{
+    text-align: left;
+    font-weight: 600;
+    font-size: 17px;
+  }
+
+  .price{
+    text-align: right;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: -50px;
+  }
+
+
+
 
   .music{
     margin-top: 2%;
@@ -126,6 +166,7 @@
   .music-content {
     margin-top: 20px;
     display: inline-block;
+    display: flex;
   }
   
   .music1, 
@@ -154,6 +195,7 @@
   .theatre-content {
     display: inline-block;
     margin-top: 20px;
+    display: flex;
   }
   
   .th1, 
