@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+}
+.lottie-container{
+    width: 40rem;
+}
+.active{
+    background: #4DD470;
+    border: 1px solid #4DD470;
+}
+.toggleEmail{
+    border: 1px solid #4DD470;
+    padding: 10px;
+    background: #fff;
+    cursor: pointer;
+    margin: 1rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+input[type = "email"], input[type = "password"]{
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
+.loginButton{
+    padding: 0.5rem;
+    margin: 1rem;
+    width: 10rem;
+    cursor: pointer;
+    background: linear-gradient(to top right, #6E91EC,#142782);
+    color: #fff;
+
+    border: 1px solid;
+}
