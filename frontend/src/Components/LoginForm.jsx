@@ -1,12 +1,12 @@
-import React,{ useState } from 'react';
+import React,{ useState,useContext } from 'react';
 import Lottie, { LottiePlayer } from 'lottie-react';
 import { SlLogin } from "react-icons/sl";
-import { Button } from '@mui/material';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import "react-phone-input-2/lib/style.css";
 import '../Styles/loginform.css'
 import animation from '../Assets/Lottie Assets/Login.json'
+import Button from '@mui/material/Button';
 
 
 const LoginForm = () => {
@@ -17,13 +17,11 @@ const LoginForm = () => {
     const [showMobile,setShowMobile] = useState(false);
 
     const toggleEmail = (e) => {
-        e.preventDefault()
         setShowEmail(true);
         setShowMobile(false);
     }
     
     const toggleMobile = (e) => {
-        e.preventDefault()
         setShowEmail(false);
         setShowMobile(true);
     }
@@ -57,6 +55,13 @@ const LoginForm = () => {
                 password: password
             })
         }
+        axios.post('/login').then((res) => {
+            
+        })
+    }
+
+    const handleToggleRegister = (e) => {
+        e.preventDefault();
     }
 
     const handleChange = (e) => {
@@ -74,10 +79,11 @@ const LoginForm = () => {
             <form onSubmit={handleSubmit} onChange={handleChange}>
                 <button onClick={toggleEmail} className='toggleEmail'>Login with Email</button>
                 <button onClick={toggleMobile} className='toggleMobile'>Login with Mobile</button>
-                <br />{showEmail && <input type='email' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)}/>}
-                <br />{showMobile && <PhoneInput country={'in'} placeholder='Enter Mobile Number ' value='' onChange={(value) => setMobileNo(value)} />}
-                <br /><input type="password" placeholder='Enter Password: ' className='pass' onChange={(e) => setPassword(e.target.value)}/>
-                <br /><Button variant='contained' >Login</Button>
+                <br />{showEmail && <input type='email' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required />}
+                <br />{showMobile && <PhoneInput country={'in'} placeholder='Enter Mobile Number ' value='' onChange={(value) => setMobileNo(value)}/>}
+                <br /><input type="password" placeholder='Enter Password: ' className='pass' onChange={(e) => setPassword(e.target.value)} required/>
+                <br /><br /><Button variant='contained' className='loginBtn'>Login</Button>
+                <br /><br />Not a User? <p onClick={handleToggleRegister}>Register Here!</p>
             </form>
         </div>
     </div>

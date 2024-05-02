@@ -329,7 +329,7 @@ app.post('/login', async (req,res) => {
     const email =  formData.email;
     const password =  formData.password;
     const mobile = formData.mobile;
-    if(mobile === null || mobile === ""){
+    if(mobile === null || mobile === "" || mobile === undefined){
         const user_data = await User.findOne({Email: email,Password : password});
         console.log(user_data)
         if(user_data){

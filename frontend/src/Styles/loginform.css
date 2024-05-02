@@ -17,7 +17,7 @@
     background: #4DD470;
     border: 1px solid #4DD470;
 }
-.toggleEmail{
+.toggleEmail,.toggleMobile{
     border: 1px solid #4DD470;
     padding: 10px;
     background: #fff;
@@ -28,16 +28,20 @@
 input[type = "email"], input[type = "password"]{
     padding: 0.5rem;
     border: none;
+    width: 300px;
     border-bottom: 1px solid black;
     outline: none;
 }
-.loginButton{
-    padding: 0.5rem;
+.loginBtn{
     margin: 1rem;
-    width: 10rem;
-    cursor: pointer;
-    background: linear-gradient(to top right, #6E91EC,#142782);
+}
+.toggleEmail:hover,.toggleMobile:hover{
+    background: #4DD470;
+    border: #fff 1px solid;
     color: #fff;
-
-    border: 1px solid;
+    transition: 0.5s ease-in all;
+}
+input[type = "email"]:focus, input[type = "password"]:focus{
+    border-bottom: 1px solid #0569B6;
+    transition: 0.2s ease-in-out all;
 }
