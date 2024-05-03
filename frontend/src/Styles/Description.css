@@ -25,6 +25,7 @@
     font-size: 15px;
     color: #B8B3B3;
     margin-top: 5px;
+    position: absolute;
 }
 .desc .rightside .city{
     font-size: 18px;
