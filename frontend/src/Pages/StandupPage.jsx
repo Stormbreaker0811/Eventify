@@ -9,7 +9,7 @@ import axios from 'axios';
 const StandupPage = () => {
     axios.defaults.baseURL = "http://localhost:4000"
 
-    const [selectedCity, setSelectedCity] = useState('');
+    const [selectedCity, setSelectedCity] = useState('Select');
     const [standupShows, setStandupShows] = useState([]);
     const [filteredData,setFilteredData] = useState([]);
     const [renderFilter,setRenderFilter] = useState(true);
@@ -24,14 +24,17 @@ const StandupPage = () => {
         })
     }, []);
 
-    const handleCityChange = (event) => {
-        setSelectedCity(event.target.value);
-        if(selectedCity === "Select"){
+    useEffect(() => {
+        if (selectedCity === 'Select') {
             setFilteredData(standupShows);
-        }else{
-            const filtered = standupShows.filter(show => show.standup_city === selectedCity);
+        } else {
+            const filtered = standupShows.filter(show => show.city === selectedCity);
             setFilteredData(filtered);
         }
+    }, [selectedCity, standupShows]);
+
+    const handleCityChange = (event) => {
+        setSelectedCity(event.target.value);
     };
 
     return (
@@ -42,7 +45,7 @@ const StandupPage = () => {
                 <div className="city-dropdown">
                     <label htmlFor="city">Select a city:</label>
                     <select id="city" value={selectedCity} onChange={handleCityChange}>
-                        <option value=""><button>Select</button></option>
+                        <option value="Select"><button>Select</button></option>
                         <option value="Pune">Pune</option>
                         <option value="Mumbai">Mumbai</option>
                         <option value="Chennai">Chennai</option>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import "react-phone-input-2/lib/style.css";
 import '../Styles/loginform.css'
-import animation from '../Assets/Lottie Assets/Login.json'
+import animation from '../Assets/Lottie Assets/Login.json';
 import Button from '@mui/material/Button';
 
 
@@ -68,24 +68,24 @@ const LoginForm = () => {
     }
 
     return (
-    <div className='container'>
-        <div className='lottie-container'>
-            <Lottie 
-            animationData={animation}/>
-        </div>
-        <div className="login-container">
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit} onChange={handleChange}>
-                <button onClick={toggleEmail} className='toggleEmail'>Login with Email</button>
-                <button onClick={toggleMobile} className='toggleMobile'>Login with Mobile</button>
-                <br />{showEmail && <input type='email' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required />}
-                <br />{showMobile && <PhoneInput country={'in'} placeholder='Enter Mobile Number ' value='' onChange={(value) => setMobileNo(value)}/>}
-                <br /><input type="password" placeholder='Enter Password: ' className='pass' onChange={(e) => setPassword(e.target.value)} required/>
-                <br /><br /><Button variant='contained' className='loginBtn'>Login</Button>
-                <br /><br />Not a User? <p onClick={handleToggleRegister}>Register Here!</p>
-            </form>
-        </div>
-    </div>
+        <div className="container">
+        <form id="loginForm" action="/login" method="POST">
+          <h2>Login</h2>
+          <label htmlFor="email">Email / Phone No :</label>
+          <input type="email" id="email" name="email" required />
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <div className="forgot-password">
+            <a href="#">Forgot Password?</a>
+          </div>
+          <input type="submit" value="Login" />
+          <div className="or">or</div>
+          <div className="additional-links">
+            <button type="button" id="showSignUpForm">Sign in with Google</button>
+            <a href="#" id="toggleSignUp">New User? Create Account</a>
+          </div>
+        </form>
+      </div>
     )
 }
 

@@ -69,6 +69,8 @@ const standup = new db.Schema({
     city: String,
     name: String,
     price: String,
+    gold_price: String,
+    platinum_price: String,
     venue: String
 })
 
@@ -76,7 +78,9 @@ const theatre = new db.Schema({
     name: String,
     venue: String,
     date: String,
-    price: String, 
+    price: String,
+    gold_price: String,
+    platinum_price: String,
     city: String,
     poster: String
 })
@@ -86,6 +90,8 @@ const music = new db.Schema({
     venue: String,
     city: String,
     price: String,
+    gold_price: String,
+    platinum_price: String,
     date: String,
     poster: String
 })
