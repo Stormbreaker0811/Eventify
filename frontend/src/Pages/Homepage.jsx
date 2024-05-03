@@ -93,7 +93,7 @@ import samay from '../Assets/samay.jpeg';
 import ed from '../Assets/ed.jpg';
 import zakir from '../Assets/zakir.jpeg';
 import comedy from '../Assets/comedy.jpg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import musicgraphic from '../Assets/musicgraphic.jpeg';
 import standupgraphic from '../Assets/standupgraphic.jpeg';
 import theatregraphic from '../Assets/theatregraphic.jpeg';
@@ -101,6 +101,7 @@ import Carousel from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
+import Description from './Description';
 
 
 
@@ -120,6 +121,18 @@ const Homepage = () => {
   const [music, setMusic] = useState([]);
 
   const [theatre, setTheatre] = useState([]);
+
+  const [descInfo, setDescInfo] = useState({
+    category: '',
+    id: '',
+    show_name: '',
+    show_price: '',
+    show_poster: '',
+    show_language: '',
+    show_venue: '',
+    show_city: '',
+    show_desc: ''
+  })
 
   useEffect(() => {
     axios.get('/standup-homepage').then((res) => {
@@ -157,7 +170,35 @@ const Homepage = () => {
   },[])
 
 
-
+  const handleShowStandup = (category, show) => {
+    const newDescInfo = {
+      category: category,
+      id: show.id,
+      show_name: show.name,
+      show_price: show.price,
+      show_language: show.language,
+      show_venue: show.venue,
+      show_city: show.city,
+      show_desc: show.desc,
+      show_poster: show.poster
+      // ... other show details
+    };
+  
+    // Check if relevant info differs before sending request
+    if (
+      newDescInfo !== descInfo
+    ) {
+      setDescInfo(newDescInfo);
+      axios.post('/post-requested-show', newDescInfo)
+        .then((res) => {
+          console.log("descInfo sent..//");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+  
 
 
   const musicEventsContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
@@ -171,9 +212,9 @@ const Homepage = () => {
         <h2>Popular Right Now</h2>
         <div className="popular-content">
           {popular.map((item) => (
-            <div key={item.id} className={`popcard${item.id}`}>
+            <Link to='/desc'><div key={item.id} className={`popcard${item.id}`} >
               <img src={item.poster} alt={`Popular ${item.id}`} className='pop'/>
-            </div>
+            </div></Link>
           ))}
         </div>
       </div>
@@ -197,23 +238,23 @@ const Homepage = () => {
         <div className="standup-content">
           {standup.map((show) => (
             <div key={show.id} className='st'>
-              <div className="show" key={show.id}>
+              <Link to='/desc'><div className="show" key={show.id} onClick={() => handleShowStandup("standup",show)}>
                         <div className="poster">
                             <img src={show.poster} className='img-poster' alt="show poster" />
                         </div>
                         <div className="show-name">
-                            <p>{show.standup_name}</p>
+                            <p>{show.name}</p>
                         </div>
                         <div className="show-venue">
-                            <p>{show.standup_venue}</p>
+                            <p>{show.venue}</p>
                         </div>
                         <div className="date">
                             <p>{show.date}</p>
                         </div>
                         <div className="price">
-                            <p>{show.standup_price}</p>
+                            <p>{show.price}</p>
                         </div>
-                    </div>
+                    </div></Link>
               
             </div>
           ))}
@@ -225,23 +266,23 @@ const Homepage = () => {
         <div className="music-content">
         {music.map((show) => (
             <div key={show.id} className='st'>
-              <div className="show" key={show.id}>
+              <Link to='/desc'><div className="show" key={show.id} onClick={() => handleShowStandup("music",show)}>
                         <div className="poster">
                             <img src={show.poster} className='img-poster' alt="show poster" />
                         </div>
                         <div className="show-name">
-                            <p>{show.music_show_name}</p>
+                            <p>{show.name}</p>
                         </div>
                         <div className="show-venue">
-                            <p>{show.music_show_venue}</p>
+                            <p>{show.venue}</p>
                         </div>
                         <div className="date">
                             <p>{show.date}</p>
                         </div>
                         <div className="price">
-                            <p>{show.music_price}</p>
+                            <p>{show.price}</p>
                         </div>
-                    </div>
+                    </div></Link>
               
             </div>
           ))}
@@ -253,24 +294,23 @@ const Homepage = () => {
         <div className="theatre-content">
         {theatre.map((show) => (
             <div key={show.id} className='st'>
-              <div className="show" key={show.id}>
+              <Link to='/desc'><div className="show" key={show.id} onClick={() => handleShowStandup("theatre",show)}>
                         <div className="poster">
                             <img src={show.poster} className='img-poster' alt="show poster" />
                         </div>
                         <div className="show-name">
-                            <p>{show.theatre_show_name}</p>
+                            <p>{show.name}</p>
                         </div>
                         <div className="show-venue">
-                            <p>{show.theatre_venue}</p>
+                            <p>{show.venue}</p>
                         </div>
                         <div className="date">
                             <p>{show.date}</p>
                         </div>
                         <div className="price">
-                            <p>{show.theatre_show_price}</p>
+                            <p>{show.price}</p>
                         </div>
-                    </div>
-              
+                    </div></Link>
             </div>
           ))}
         </div>

@@ -1,6 +1,5 @@
 import React,{ useState,useContext } from 'react';
 import Lottie, { LottiePlayer } from 'lottie-react';
-import { SlLogin } from "react-icons/sl";
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import "react-phone-input-2/lib/style.css";

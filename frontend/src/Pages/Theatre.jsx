@@ -57,16 +57,16 @@ const Theatre = () => {
                             <img src={show.poster} className='img-poster' alt="show poster" />
                         </div>
                         <div className="show-name">
-                            <p>{show.theatre_show_name}</p>
+                            <p>{show.name}</p>
                         </div>
                         <div className="show-venue">
-                            <p>{show.theatre_venue}</p>
+                            <p>{show.venue}</p>
                         </div>
                         <div className="date">
                             <p>{show.date}</p>
                         </div>
                         <div className="price">
-                            <p>{show.theatre_show_price}</p>
+                            <p>{show.price}</p>
                         </div>
                     </div>
                 ))}

@@ -66,16 +66,16 @@ const StandupPage = () => {
                             <img src={show.poster} className='img-poster' alt="show poster" />
                         </div>
                         <div className="show-name">
-                            <p>{show.standup_name}</p>
+                            <p>{show.name}</p>
                         </div>
                         <div className="show-venue">
-                            <p>{show.standup_venue}</p>
+                            <p>{show.venue}</p>
                         </div>
                         <div className="date">
                             <p>{show.date}</p>
                         </div>
                         <div className="price">
-                            <p>{show.standup_price}</p>
+                            <p>{show.price}</p>
                         </div>
                     </div>
                 ))}

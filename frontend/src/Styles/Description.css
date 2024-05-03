@@ -5,34 +5,44 @@
 .desc .leftside{
     max-height: 500px;
     max-width: 500px;
+
 }
+
+.desc .leftside .poster-img{
+    width: 500px;
+    height: 500px;
+    border-radius: 5rem;
+    padding: 10%;
+}
+
 .desc .rightside{
     margin-left: 500px;
     margin-top: -350px;
+    padding-left: 20%;
 }
 
-.desc .rightside .duration{
+.desc .rightside .price{
     font-size: 15px;
     color: #B8B3B3;
-    margin-top: -10px;
+    margin-top: 5px;
 }
-.desc .rightside .category{
-    font-size: 15px;
+.desc .rightside .city{
+    font-size: 18px;
     color: #B8B3B3;
-    margin-top: -5px;
+    margin-top: 50px;
 }
-.desc .rightside .director{
-    font-size: 15px;
+.desc .rightside .Venue{
+    font-size: 18px;
     color: #B8B3B3;
-    margin-top: -5px;
+    margin-top: 10px;
 }
 
-.desc .rightside .movie-description{
+.desc .rightside .description{
     width: 800px;
     font-size: 22px;
     color: black;
     word-spacing: 2px;
-    margin-top: -5px;
+    margin-top: 15px;
 }
 .desc .rightside .trailer-button {
     border: none;
@@ -74,12 +84,3 @@
     background-color: #9c433d;
 }
 
-.desc .cast .casttitle{
-    margin-left: 130px;
-    margin-top: 100px;
-}
-
-.desc .cast .castimg{
-    margin-left: 100px;
-    margin-top: 50px;
-}

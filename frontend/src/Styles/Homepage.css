@@ -3,16 +3,20 @@
     margin-left: 50px;
     overflow-x: auto;
     white-space: nowrap;
+    margin-top: 20px;
   }
 
   .popular-title{
     position: relative;
     margin-left: 51px;
+    margin-top: 200px;
+    
   }
 
   .popular .popular-content{
     display: inline-block;
     display: flex;
+    padding: 2%;
     gap: 20px;
 
   }
@@ -96,7 +100,7 @@
   
 
   .standup{
-    margin-top: 2%;
+    margin-top: 4%;
     margin-left: 50px;
     overflow-x: auto;
     white-space: nowrap;
@@ -104,7 +108,7 @@
 
   .standup-content {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 40px;
     display: flex;
     gap: 30px;
     padding-bottom: 2%;
@@ -120,6 +124,8 @@
     border: 1px solid hsl(0, 0%, 80%);
     justify-content: center;
     text-align: center;
+    text-decoration: none;
+    color: black;
   }
 
   .img-poster{
@@ -164,9 +170,10 @@
   }
 
   .music-content {
-    margin-top: 20px;
+    margin-top: 40px;
     display: inline-block;
     display: flex;
+    margin-bottom: 3%;
   }
   
   .music1, 
@@ -183,19 +190,22 @@
     border: 1px solid hsl(0, 0%, 80%);
     justify-content: center;
     text-align: center;
+    text-decoration: none;
+    color: black;
   }
 
   .theatre{
     margin-top: 2%;
     margin-left: 50px;
-    overflow-x: auto;
-    white-space: nowrap;
+    overflow-x: none;
+    white-space: wrap;
   }
 
   .theatre-content {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 40px;
     display: flex;
+    margin-bottom: 5%;
   }
   
   .th1, 
@@ -212,6 +222,8 @@
     border: 1px solid hsl(0, 0%, 80%);
     justify-content: center;
     text-align: center;
+    text-decoration: none;
+    color: black;
   }
   
   

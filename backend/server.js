@@ -7,7 +7,6 @@ const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/stora
 const db = require('mongoose');
 const cors = require('cors');
 const fs = require('fs');
-const navigator = require('navigator');
 const path = require('path');
 const multer = require('multer');
 
@@ -28,6 +27,8 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 const auth = getAuth();
+
+let descData = {};
 
 
 
@@ -65,15 +66,15 @@ const user = new db.Schema({
 const standup = new db.Schema({
     date: String,
     poster: String,
-    standup_city: String,
-    standup_name: String,
-    standup_price: String,
-    standup_venue: String
+    city: String,
+    name: String,
+    price: String,
+    venue: String
 })
 
 const theatre = new db.Schema({
-    theatre_show_name: String,
-    theatre_venue: String,
+    name: String,
+    venue: String,
     date: String,
     price: String, 
     city: String,
@@ -81,8 +82,8 @@ const theatre = new db.Schema({
 })
 
 const music = new db.Schema({
-    music_show_name: String,
-    music_venue: String,
+    name: String,
+    venue: String,
     city: String,
     price: String,
     date: String,
@@ -114,10 +115,10 @@ app.post('/add-standup',(req,res) => {
     const standup_data = {
         date: data.date,
         poster: data.poster,
-        standup_city: data.city,
-        standup_name: data.name,
-        standup_price: data.price,
-        standup_venue: data.venue
+        city: data.city,
+        name: data.name,
+        price: data.price,
+        venue: data.venue
     }
     console.log(standup_data);
     Standup.create(standup_data).then(() => {
@@ -137,8 +138,8 @@ app.post('/add-theatre',(req,res) => {
         poster: data.poster,
         city: data.city,
         theatre_show_name: data.name,
-        standup_price: data.price,
-        theatre_venue: data.venue
+        price: data.price,
+        venue: data.venue
     }
     console.log(theatre_data);
     Theatre.create(theatre_data).then(() => {
@@ -157,9 +158,9 @@ app.post('/add-music',(req,res) => {
         date: data.date,
         poster: data.poster,
         city: data.city,
-        music_show_name: data.name,
+        name: data.name,
         price: data.price,
-        music_venue: data.venue
+        venue: data.venue
     }
     console.log(music_data);
     Theatre.create(music_data).then(() => {
@@ -255,7 +256,45 @@ app.get('/theatre-homepage', async (req,res) => {
     }
 })
 
+app.post('/post-requested-show', (req,res) => {
+    descData = req.body;
+    console.log("descData loaded..//");
+    console.log(descData);
+    if(descData){
+        res.status(200).send(true);
+    }else{
+        res.status(400).send(false);
+    }
+    // window.location.href = '/desc';
+})
 
+app.get('/get-requested-show',async (req,res) => {
+    console.log("descInfo got..//")
+    console.log(descData);
+    const id = descData.id;
+    if(descData.category === "theatre"){
+        await Theatre.findOne({ name: descData.show_name })
+        .then((doc) => {
+            res.status(200).json(doc);
+        }).catch((err) => {
+            console.error(err);
+        })
+    }else if(descData.category === "music"){
+        await Music.findOne({ name: descData.show_name})
+        .then((doc) => {
+            res.status(200).json(doc);
+        }).catch((err) => {
+            console.error(err);
+        })
+
+    }else if(descData.category === "standup"){
+        await Standup.findOne({ name: descData.show_name }).then((doc) => {
+            res.status(200).json(doc);
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
+})
 
 
 app.post('/get-music', async (req,res) => {
@@ -280,15 +319,15 @@ app.get('/get-popular', async (req,res) => {
     try{
     const popular_content = [];
 
-    const standup_content = await Standup.findOne({standup_name: "The Zakir Khan Show"});
+    const standup_content = await Standup.findOne({name: "The Zakir Khan Show"});
 
     if(standup_content){
         popular_content.push(standup_content);
     }
 
-    const theatre_content = await Theatre.findOne({theatre_show_name: "Matilda"});
+    const theatre_content = await Theatre.findOne({name: "Matilda"});
 
-    const music_content = await Music.findOne({ music_show_name: "Sunburn Arena ft. Alan Walker" });
+    const music_content = await Music.findOne({ name: "Sunburn Arena ft. Alan Walker" });
 
     if(theatre_content){
         popular_content.push(theatre_content);
