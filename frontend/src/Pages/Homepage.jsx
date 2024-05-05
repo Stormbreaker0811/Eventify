@@ -169,6 +169,18 @@ const Homepage = () => {
     })
   },[])
 
+  useEffect(() => {
+    const email = sessionStorage.getItem("Email");
+    const name = sessionStorage.getItem("Name");
+    const mobile = sessionStorage.getItem("Mobile");
+    if(email && name && mobile){
+      const login = document.getElementById("login");
+      const signup = document.getElementById("signup");
+      login.style.display="none";
+      signup.style.display="none";
+    }
+  })
+
 
   const handleShowStandup = (category, show) => {
     const newDescInfo = {
@@ -198,7 +210,6 @@ const Homepage = () => {
         });
     }
   };
-  
 
 
   const musicEventsContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];

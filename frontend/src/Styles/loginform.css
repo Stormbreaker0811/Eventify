@@ -87,7 +87,6 @@ input[type="submit"]:hover {
 }
 
 .social-links{
-  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -119,6 +118,7 @@ input[type="submit"]:hover {
 .additional-links a:hover {
   text-decoration: underline;
 }
+
 
 .or {
   text-align: center;

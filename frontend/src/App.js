@@ -16,6 +16,8 @@ import CreateEvent from './Pages/CreateEvent';
 import StandupPage from './Pages/StandupPage';
 import Theatre  from './Pages/Theatre';
 import Music from './Pages/Music';
+import Forgotpass from './Components/Forgotpass';
+import ProfilePage from './Pages/ProfilePage';
 
 function App() {
   return (
@@ -33,9 +35,11 @@ function App() {
           <Route path='/movies' element={<MoviesPage/>} />
           <Route path='/standup' element={<StandupPage/>}/>
           <Route path='/about' element={<Aboutus/>}/>
+          <Route path='/forgot-pass' element={<Forgotpass />} />
           <Route path='orders' element={<YourOrders/>}/>
           <Route path='add-event' element={<CreateEvent/>}/>
           <Route path='/theatre' element={<Theatre/>}/>
+          <Route path='/profile' element={<ProfilePage />}/>
           <Route path='/music' element={<Music/>}/>
         </Routes>
       </BrowserRouter>

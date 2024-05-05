@@ -29,9 +29,9 @@ const Navbar = () => {
           <Searchbar />
         </div>
         <div className="navbar-right">
-          <Link to="/about" className="nav-link">About us</Link>
-          <Link to="/login" className="nav-link">Login</Link>
-          <Link to="/signup" className="nav-link">Sign-Up</Link>
+          <Link to="/about" className="nav-link" id='about'>About us</Link>
+          <Link to="/login" className="nav-link" id='login'>Login</Link>
+          <Link to="/signup" className="nav-link" id='signup'>Sign-Up</Link>
           <div className="menu-container">
             <img src={MenuIcon} className="menu-icon" alt="Menu" onClick={toggleMenu} />
             {isMenuOpen && (

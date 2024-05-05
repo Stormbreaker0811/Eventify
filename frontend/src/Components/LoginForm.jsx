@@ -1,4 +1,4 @@
-import React,{ useState,useContext } from 'react';
+import React,{ useState,useContext, useEffect } from 'react';
 import Lottie, { LottiePlayer } from 'lottie-react';
 import app from '../firebase.init.js';
 import { getAuth, signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
@@ -15,15 +15,13 @@ import { initializeApp } from 'firebase/app';
 
 
 const LoginForm = ({ toggleForm }) => {
-    const baseUrl = "http://localhost:5000";
+    const baseUrl = "http://localhost:4000";
     axios.defaults.baseURL = baseUrl;
 
     const [showEmail,setShowEmail] = useState(true);
     const [showMobile,setShowMobile] = useState(false);
 
-    const firbaseapp = initializeApp(app);
-
-        const toggleEmail = (e) => {
+    const toggleEmail = (e) => {
         setShowEmail(true);
         setShowMobile(false);
     }
@@ -37,16 +35,12 @@ const LoginForm = ({ toggleForm }) => {
     const [email,setEmail] = useState('');
     const [mobileNo,setMobileNo] = useState('');
     const [formState,setFormState] = useState({
-        password: '',
-        email: '',
-        mobile: '',
+        user_email:'',
+        user_password: '',
+        user_mobile: '',
     });
 
     const [showModal , setShowModal] = useState(false);
-
-    const openModal = () => {
-        setShowModal(true);
-    }
 
     const handleGoogleSignin = async (e) => {
         e.preventDefault();
@@ -64,10 +58,6 @@ const LoginForm = ({ toggleForm }) => {
         })
     }
 
-    const closeModal = () => {
-        setShowModal(false);
-    }
-
     // const [fullName , setFullName] = useState('')
     // const [password, setPassword] = useState('');
     // const [email,setEmail] = useState('');
@@ -79,16 +69,24 @@ const LoginForm = ({ toggleForm }) => {
         e.preventDefault();
         if(email.includes('@')){
             setFormState({
-                email: email,
-                password: password
+                user_email: email,
+                user_password: password
             })
         }else {
             setFormState({
-                mobile: mobileNo,
-                password: password
+                user_mobile: email,
+                user_password: password
             })
         }
         axios.post('/login',formState).then((res) => {
+            if(res.status === 200){
+                sessionStorage.setItem("Email",res.data.Email);
+                sessionStorage.setItem("Name",res.data.Name);
+                sessionStorage.setItem("Mobile",res.data.Mobile)
+                window.location.href = "/";
+            }else{
+                alert("User Not Found..//");
+            }
             console.log("Login Data Sent..//");
         }).catch((err) => {
             console.error(err);
@@ -112,23 +110,23 @@ const LoginForm = ({ toggleForm }) => {
                 <form method="POST" onSubmit={handleSubmit}>
                     <h2 className='login-title'>Login</h2>
                     <label htmlFor="email">Email / Phone No :</label>
-                    <input type="text" id="email" name="email" required onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" id="email" name="email" aria-errormessage='' onChange={(e) => setEmail(e.target.value)} />
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" required onChange={(e) => setPassword(e.target.value)} />
                     <div className="forgot-password">
-                        <a href='#' onClick={openModal}>Forgot Password?</a>
+                        <a href='/forgot-pass'>Forgot Password?</a>
                     </div>
                     <input type="submit" value="Login" />
                     <div className="or">or</div>
                     <div className="additional-links">
                         <div className="social-links">
+                            <h4>Sign In With: </h4>
                         <img src={Google} onClick={handleGoogleSignin}/>
                         </div>
                         <a id="toggleSignUp" onClick={toggleForm}>New User? Create Account</a>
                     </div>
                 </form>
             </div>
-            {showModal && <Forgotpass onClose={closeModal}/>}
         </div>
     )
 }

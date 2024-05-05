@@ -116,6 +116,18 @@ const Theatre = db.model('Theatre', theatre);
 const Music = db.model("Music", music);
 
 
+
+app.post("/google-sign-in",async (req,res) => {
+    const data = req.body;
+    const user_data = new User({
+        Name: data.displayName,
+        Email: data.email,
+        Mobile: data.phoneNumber,
+        Password: data.password.password
+    })
+})
+
+
 app.post('/add-standup',(req,res) => {
     const data = req.body;
     const standup_data = {
@@ -182,34 +194,30 @@ app.post('/add-music',(req,res) => {
 
 app.post('/register' , (req,res) => {
     const data = req.body;
-    const name = data.name;
-    const email = data.email;
-    const password = data.password;
-    const mobile = data.mobile;
-    const age = data.age;
-    const gender = data.gender;
-    const location = data.location
-    const user_data = new User({
-        Name: name,
-        Email: email,
-        Password: password,
-        Mobile: mobile,
-        Age: age,
-        Gender: gender,
-        Location: location
-    });
-    user_data.save().then(() => {
-        console.log("User Data Inserted..//");
-    }).catch((error) => console.log(error));
-
-    createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
-        //Signed Up
-        const user = userCredential.user;
-        console.log(user.uid);
-        const uid = user.uid;
-    });
-
-    return res.status(200).send("Registration Success..//");
+    console.log(data)
+    const name = data.user_name;
+    const email = data.user_email;
+    const password = data.user_password;
+    const mobile = data.user_mobile;
+    const isLogin = User.findOne({ Email: email, Password: password });
+    if(isLogin){
+        return res.status(400).send("User Already Logged In..//");
+    }else{
+        const user_data = new User({
+            Name: name,
+            Email: email,
+            Password: password,
+            Mobile: mobile,
+        });
+        user_data.save().then(() => {
+            console.log("User Data Inserted..//");
+        }).catch((error) => console.log(error));
+        createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user.uid);
+        });
+        return res.status(200).send("Registration Success..//");
+    }
 });
 
 app.post('/get-movies', async (req,res) => {
@@ -371,18 +379,18 @@ app.post('/post-movies', upload.single('poster'),(req,res,next) => {
 app.post('/login', async (req,res) => {
     const formData = req.body;
     console.log(formData);
-    const email =  formData.email;
-    const password =  formData.password;
-    const mobile = formData.mobile;
+    const email =  formData.user_email;
+    const password =  formData.user_password;
+    const mobile = formData.user_mobile;
     if(mobile === null || mobile === "" || mobile === undefined){
         const user_data = await User.findOne({Email: email,Password : password});
         console.log(user_data)
         if(user_data){
-            res.status(200).send(true);
+            res.status(200).json(user_data);
         }else{
             res.status(400).send(false);
         }
-    }else if (mobile === undefined || email === undefined){
+    }else if (email === undefined || email === null || email === ""){
         return res.status(400).send(false)
         }else{
             const user_data = await User.findOne({Mobile: mobile,Password: password});

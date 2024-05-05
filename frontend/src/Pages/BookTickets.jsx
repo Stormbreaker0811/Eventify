@@ -71,7 +71,7 @@ const BookTickets = () => {
                     <button onClick={() => updateQuantity(show.id, 1)}>+</button> */}
                   </div>
                 </div>
-              <Link to="/payment" className='payment-button'>Book</Link>
+              <Link to="#" className='payment-button'>Book</Link>
             </div>
           </div>
         </div>
