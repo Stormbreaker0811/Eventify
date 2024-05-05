@@ -6,6 +6,10 @@
     margin-top: 20px;
   }
 
+  .homepage{
+    overflow: hidden;
+  }
+
   .popular-title{
     position: relative;
     margin-left: 51px;
@@ -206,6 +210,8 @@
     margin-top: 40px;
     display: flex;
     margin-bottom: 5%;
+    overflow: scroll;
+    overflow-y: hidden;
   }
   
   .th1, 

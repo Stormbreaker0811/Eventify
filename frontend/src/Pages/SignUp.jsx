@@ -2,8 +2,11 @@
 import React, { useState } from 'react';
 import '../Styles/signUpPage.css';
 import PhoneInput from 'react-phone-input-2';
+import animation from '../Assets/Lottie Assets/Login.json';
+import Lottie from 'lottie-react';
 
-const SignUp = () => {
+
+const SignUp = ({ toggleForm }) => {
 
   const [email,setEmail] = useState('');
   const [mobile,setMobile] = useState('');
@@ -17,14 +20,18 @@ const SignUp = () => {
 
   return (
     <div className="signupform">
+      <div className="lottie">
+        <Lottie animationData={animation} />
+      </div>
+      <div className="signup-container">
       <form id="signupForm" method="POST" onSubmit={handleSubmit}>
       <h2>Sign Up</h2>
       <label htmlFor="name">Name:</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" name="name" required onChange={(e) => setName(e.target.value)} />
       <label htmlFor="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+      <input type="email" id="email" name="email" required onChange={(e) => setEmail(e.target.value)}/>
       <label htmlFor="phone">Phone Number:</label>
-      <PhoneInput country={"in"} value="" />
+      <input type="tel" name="mobile" id="mobile" onChange={(e) => setMobile(e.target.value)} />
       <label htmlFor="password">Password:</label>
       <input type="password" id="password" name="password" required />
       <label htmlFor="confirmPassword">Confirm Password:</label>
@@ -33,9 +40,10 @@ const SignUp = () => {
       <div className="or">or</div>
       <div className="additional-links">
         <button type="button" id="showLoginForm">Sign in with Google</button>
-        <a href="#" id="toggleLogin">Already have an account? Login</a>
+        <a id="toggleLogin" onClick={toggleForm}>Already have an account? Login</a>
       </div>
     </form>
+    </div>
     </div>
     
   );

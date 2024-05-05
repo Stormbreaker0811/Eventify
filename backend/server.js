@@ -370,7 +370,7 @@ app.post('/post-movies', upload.single('poster'),(req,res,next) => {
 
 app.post('/login', async (req,res) => {
     const formData = req.body;
-    console.log(formData)
+    console.log(formData);
     const email =  formData.email;
     const password =  formData.password;
     const mobile = formData.mobile;

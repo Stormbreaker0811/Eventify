@@ -1,8 +1,15 @@
 .signupform{
     justify-content: center;
     align-items: center;
-    margin-left: 550px;
+    display: flex;
     text-align: center;
+    height: 100vh;
+}
+
+form{
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .sign-up-container {
@@ -12,10 +19,11 @@
     padding: 0;
     display: flex;
     justify-content: center;
+    width: 400px;
     align-items: center;
     height: 100vh;
     text-align: center;
-  }
+}
   
   form {
     background-color: #fff;
@@ -37,11 +45,13 @@
     margin-bottom: 5px;
   }
   
-  input[type="text"],
-  input[type="password"] {
+  #name,#email,
+  #password,#confirmPassword,#mobile {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
+    outline: none;
+    font-size: 17px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -71,6 +81,10 @@
     color: #555;
     position: relative;
   }
+
+  .lottie{
+    width: 35%;
+  }
   
   .or::before,
   .or::after {
@@ -95,8 +109,12 @@
     font-style: italic;
     font-size: 12px;
   }
+
+  a{
+    cursor: pointer;
+  }
   
-  .additional-links button {
+  .additional-links #showLoginForm {
     display: block;
     width: 100%;
     background-color: #dd4b39;
@@ -109,7 +127,7 @@
     margin-bottom: 10px;
   }
   
-  .additional-links button:hover {
+  .additional-links #showLoginForm:hover {
     background-color: #c53727;
   }
   

@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
 }
-.container {
+.contain {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -12,121 +12,140 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
+}
+
+a{
+  cursor: pointer;
+}
+
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+form {
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: left;
+  background: transparent;
+  margin-left: 0;
+}
+
   
-  form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: left;
-  }
+.login-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
   
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+label {
+  display: block;
+  margin-bottom: 5px;
+}
   
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="email"],
-  input[type="password"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  input[type="submit"] {
-    width: 100%;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  .forgot-password {
-    text-align: right;
-    font-style: italic;
-    margin-bottom: 5px;
-    font-size: 12px;
-  }
-  
-  .additional-links {
-    text-align: center;
-    font-style: italic;
-    font-size: 12px;
-  }
-  
-  .additional-links button {
-    display: block;
-    width: 100%;
-    background-color: #dd4b39;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 10px;
-  }
-  
-  .additional-links button:hover {
-    background-color: #c53727;
-  }
-  
-  .additional-links a {
-    display: block;
-    color: #007bff;
-    text-decoration: none;
-    margin-bottom: 15px;
-  }
-  
-  .additional-links a:hover {
-    text-decoration: underline;
-  }
-  
-  .or {
-    text-align: center;
-    margin: 10px 0;
-    font-weight: italic;
-    color: #555;
-    position: relative;
-  }
-  
-  .or::before,
-  .or::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background-color: #ccc;
-  }
-  
-  .or::before {
-    left: 0;
-  }
-  
-  .or::after {
-    right: 0;
-  }
-  
-  .hidden {
-    display: none;
-  }
+#email,#password{
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.forgot-password {
+  text-align: right;
+  font-style: italic;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.additional-links {
+  text-align: center;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.social-links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem
+}
+.social-links img{
+  width: 12%;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 2rem;
+  box-shadow: -10px -10px 30px 4px rgba(0,0,0,0.1), 10px 10px 30px 4px rgba(45,78,255,0.15);
+}
+.googleLogin{
+  border-radius: 20%;
+  cursor: pointer;
+}
+
+.lottie{
+  width: 35%;
+}
+
+.additional-links a {
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+.additional-links a:hover {
+  text-decoration: underline;
+}
+
+.or {
+  text-align: center;
+  margin: 10px 0;
+  font-weight: italic;
+  color: #555;
+  position: relative;
+}
+
+.or::before,
+.or::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.or::before {
+  left: 0;
+}
+
+.or::after {
+  right: 0;
+}
+
+.hidden {
+  display: none;
+}

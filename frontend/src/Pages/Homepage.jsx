@@ -206,7 +206,7 @@ const Homepage = () => {
   const theatreContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
 
   return (
-    <div>
+    <div className='homepage'>
       <Navbar />
       <div className="popular">
         <h2>Popular Right Now</h2>

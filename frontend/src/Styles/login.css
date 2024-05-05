@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container{
+    overflow: hidden;
+}
+
+.form-container{
+    display: flex;
+    transition: transform 0.5s ease;
+}

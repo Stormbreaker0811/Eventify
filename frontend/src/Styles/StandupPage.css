@@ -20,6 +20,11 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
+  }
+
+  .city-dropdown option{
+    cursor: pointer;
   }
   
   .city-dropdown select:focus {
