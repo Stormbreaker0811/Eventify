@@ -44,21 +44,37 @@
 }
 
 .counter {
-  display: flex;
+  display: inline;
   align-items: center;
 }
 
-.counter button {
+.counter .platinum_button {
   padding: 8px 12px;
   background-color: #007bff;
   color: #fff;
+  margin: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.counter button:hover {
+.counter .gold_button {
+  padding: 8px 12px;
+  background-color: #FFBE62;
+  color: #fff;
+  border: none;
+  margin: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.counter .gold_button:hover{
+  background-color: #FFA02E;
+}
+
+.counter .platinum_button:hover {
   background-color: #0056b3;
 }
 
@@ -68,8 +84,8 @@
 }
 
 .payment-button {
-  display: inline-block;
-  padding: 12px 24px;
+  display: flex;
+  padding: 10px 20px;
   background-color: #28a745;
   color: #fff;
   border: none;
@@ -86,14 +102,20 @@
 
 /* BookTickets.css */
 
-.cart {
+.cart-container {
   margin: 20px auto;
   padding: 20px;
+  display: inline-flex;
   border: 1px solid #ccc;
   border-radius: 10px;
+  justify-content: space-between;
   background-color: #f9f9f9;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.cart-container{
+  display: flex;
 }
 
 .cart h3 {

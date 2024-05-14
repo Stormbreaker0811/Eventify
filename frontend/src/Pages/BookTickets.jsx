@@ -7,7 +7,11 @@ import inception from '../Assets/inception.jpg';
 import axios from 'axios';
 
 const BookTickets = () => {
-  const [ticketPrice, setTicketPrice] = useState({});
+  const [ticketPrice, setTicketPrice] = useState(0);
+  const [counter,setCounter] = useState('')
+
+  const [goldPrice,setGoldPrice] = useState('');
+  const [platinumPrice,setPlatinumPrice] = useState('');
 
   const [ticketQuantities, setTicketQuantities] = useState({});
   const [cart, setCart] = useState({ Gold: 0, Premium: 0 });
@@ -20,10 +24,41 @@ const BookTickets = () => {
       setShow(res.data);
       console.log("show is set..//");
       console.log(show);
+      if(show.gold_price === null || show.gold_price === undefined || show.gold_price === ''){
+        const finalPrice = show.price.split(".")
+        setGoldPrice(show.price);
+        setPlatinumPrice(show.price+200);
+      }else{
+        setGoldPrice(show.gold_price);
+        setPlatinumPrice(show.platinum_price);
+      }
     }).catch((err) => {
       console.error(err);
     })
   },[])
+
+  const toggleGoldPlus = () => {
+    setTicketPrice(ticketPrice+parseInt(goldPrice));
+  }
+
+  const toggleGoldMinus = () => {
+    if(ticketPrice === 0){
+      setTicketPrice(0)
+    }
+    setTicketPrice(ticketPrice-parseInt(goldPrice));
+  }
+
+  const togglePlatinumPlus = () => {
+    setTicketPrice(ticketPrice+parseInt(platinumPrice));
+
+  }
+
+  const togglePlatinumMinus = () => {
+    if(ticketPrice === 0){
+      setTicketPrice(0)
+    }
+    setTicketPrice(ticketPrice-parseInt(platinumPrice));
+  }
 
   // const updateQuantity = (eventId, value) => {
   //   setTicketQuantities(prevState => ({
@@ -49,9 +84,12 @@ const BookTickets = () => {
   return (
     <div>
       <Navbar />
-      <div className='cart'>
-        <h3>Cart</h3>
-        <p>Total: Rs. {cart.Gold + cart.Premium}</p>
+      <div className="cart-container">
+        <div className='cart'>
+          <h3>Cart</h3>
+          <p>Total: Rs. {cart.Gold + cart.Premium}</p>
+        </div>
+        <Link to="/payments" className='payment-button'>Book</Link>
       </div>
         <div key={show.id} className='ticket-info'>
           <div className='event-poster'>
@@ -66,12 +104,23 @@ const BookTickets = () => {
               <h3>Category</h3>
                 <div key={show.id} className="category-item">
                   <div className='counter'>
+                    <div className="gold">
+                      Gold Ticket
+                      <button className='gold_button' onClick={toggleGoldPlus}>-</button>
+                      {ticketPrice}
+                      <button className='gold_button' onClick={toggleGoldMinus}>+</button>
+                    </div>
+                    <div className="platinum">
+                      Platinum Ticket
+                      <button className='platinum_button' onClick={togglePlatinumPlus}>-</button>
+                      {ticketPrice}
+                      <button className='platinum_button' onClick={togglePlatinumMinus}>+</button>
+                    </div>
                     {/* <button onClick={() => updateQuantity(show.id, -1)}>-</button>
                     <p>{ticketQuantities[show.id] || 0}</p>
                     <button onClick={() => updateQuantity(show.id, 1)}>+</button> */}
                   </div>
                 </div>
-              <Link to="#" className='payment-button'>Book</Link>
             </div>
           </div>
         </div>

@@ -11,19 +11,11 @@ import axios from 'axios';
 
 
 const SignUp = ({ toggleForm }) => {
-
   const [email,setEmail] = useState('');
   const [mobile,setMobile] = useState('');
   const [password,setPassword] = useState('');
   const [name,setName] = useState('');
   const [confirmPassword,setConfirmPassword] = useState('');
-
-  const [formState,setFormState] = useState({
-    user_name : '',
-    user_email: '',
-    user_mobile: '',
-    user_password: '',
-  });
 
   axios.defaults.baseURL = "http://localhost:4000";
 
@@ -31,16 +23,19 @@ const SignUp = ({ toggleForm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(password === confirmPassword){
-      setFormState({
+      const formState = {
         user_name: name,
         user_email: email,
         user_password: password,
         user_mobile: mobile
-      });
+      };
       axios.post("/register",formState).then((res) => {
         const status = res.status;
         if(status === 200){
           alert("User Registered Successfully");
+          sessionStorage.setItem("Email",email);
+          sessionStorage.setItem("Name",name);
+          sessionStorage.setItem("Mobile",mobile);
           window.location.href = "/";
         }else if(status === 400){
           alert("User Exists..//");
@@ -101,7 +96,7 @@ const SignUp = ({ toggleForm }) => {
       <input type="password" id="password" name="password" required onChange={(e) => setPassword(e.target.value)} />
       <label htmlFor="confirmPassword">Confirm Password:</label>
       <input type="password" id="confirmPassword" name="confirmPassword" required onChange={(e) => setConfirmPassword(e.target.value)} />
-      <input type="submit" value="Sign Up" />
+      <button className='register-btn'>Register</button>
       <div className="or">or</div>
       <div className="additional-links">
       <div className="social-links">

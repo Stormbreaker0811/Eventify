@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Styles/Navbar.css';
 import Logo from '../Assets/Logo.png';
 import { Link } from 'react-router-dom';
@@ -10,10 +10,17 @@ import CreateEvent from '../Pages/CreateEvent';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCreateEventOpen, setIsCreateEventOpen] = useState(false); // State for Create Event overlay
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    if(sessionStorage.getItem("loginState") === "true"){
+      setIsLoggedIn(true);
+    }
+  })
 
   const toggleCreateEvent = () => {
     setIsCreateEventOpen(!isCreateEventOpen);
@@ -30,8 +37,14 @@ const Navbar = () => {
         </div>
         <div className="navbar-right">
           <Link to="/about" className="nav-link" id='about'>About us</Link>
-          <Link to="/login" className="nav-link" id='login'>Login</Link>
-          <Link to="/signup" className="nav-link" id='signup'>Sign-Up</Link>
+          {isLoggedIn ? (
+            <></>
+          ) : (
+            <>
+            <Link to="/login" className="nav-link" id='login'>Login</Link>
+            <Link to="/signup" className="nav-link" id='signup'>Sign-Up</Link>
+            </>
+          )}
           <div className="menu-container">
             <img src={MenuIcon} className="menu-icon" alt="Menu" onClick={toggleMenu} />
             {isMenuOpen && (

@@ -194,30 +194,29 @@ app.post('/add-music',(req,res) => {
 
 app.post('/register' , (req,res) => {
     const data = req.body;
-    console.log(data)
+    console.log(data);
     const name = data.user_name;
     const email = data.user_email;
     const password = data.user_password;
     const mobile = data.user_mobile;
-    const isLogin = User.findOne({ Email: email, Password: password });
-    if(isLogin){
+    const isLogin = User.find({ Email: email, Password: password });
+    if(isLogin > 0){
         return res.status(400).send("User Already Logged In..//");
-    }else{
-        const user_data = new User({
-            Name: name,
-            Email: email,
-            Password: password,
-            Mobile: mobile,
-        });
-        user_data.save().then(() => {
-            console.log("User Data Inserted..//");
-        }).catch((error) => console.log(error));
-        createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user.uid);
-        });
-        return res.status(200).send("Registration Success..//");
     }
+    const user_data = new User({
+        Name: name,
+        Email: email,
+        Password: password,
+        Mobile: mobile,
+    });
+    user_data.save().then(() => {
+        console.log("User Data Inserted..//");
+    }).catch((error) => console.log(error));
+    createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user.uid);
+    });
+    return res.status(200).send("Registration Success..//");
 });
 
 app.post('/get-movies', async (req,res) => {
@@ -383,23 +382,22 @@ app.post('/login', async (req,res) => {
     const password =  formData.user_password;
     const mobile = formData.user_mobile;
     if(mobile === null || mobile === "" || mobile === undefined){
-        const user_data = await User.findOne({Email: email,Password : password});
+        let user_data = await User.findOne({Email: email,Password : password});
         console.log(user_data)
         if(user_data){
             res.status(200).json(user_data);
         }else{
-            res.status(400).send(false);
+            res.status(400).send("No user data found..//");
         }
     }else if (email === undefined || email === null || email === ""){
-        return res.status(400).send(false)
+        const user_data = await User.findOne({Mobile: mobile,Password: password});
+        console.log(user_data)
+        if(user_data){
+            res.status(200).json(user_data);
         }else{
-            const user_data = await User.findOne({Mobile: mobile,Password: password});
-            if(user_data){
-                res.status(200).send(true);
-            }else{
-                res.status(400).send(false);
-            }
+            res.status(400).send("User not found..//");
         }
+    }
 });
 
 app.post('/posters', async (req,res) => {

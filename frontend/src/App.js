@@ -18,6 +18,7 @@ import Theatre  from './Pages/Theatre';
 import Music from './Pages/Music';
 import Forgotpass from './Components/Forgotpass';
 import ProfilePage from './Pages/ProfilePage';
+import LottieLoading from './Components/LottieLoading';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path='/theatre' element={<Theatre/>}/>
           <Route path='/profile' element={<ProfilePage />}/>
           <Route path='/music' element={<Music/>}/>
+          <Route path='/lottie' element={<LottieLoading/>}/>
         </Routes>
       </BrowserRouter>
     </div>

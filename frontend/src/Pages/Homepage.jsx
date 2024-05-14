@@ -102,11 +102,13 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import Description from './Description';
+import LottieLoading from '../Components/LottieLoading';
 
 
 
 const Homepage = () => {
   axios.defaults.baseURL = "http://localhost:4000";
+  const [loading,setLoading] = useState(true);
   // const popularContent = [
   //   { id: 1, image: samay },
   //   { id: 2, image: ed },
@@ -149,7 +151,7 @@ const Homepage = () => {
       console.log(music);
     }).catch((err) => {
       console.error(err);
-    })
+    }).finally(() => setLoading(false))
 },[])
 
   useEffect(() => {
@@ -158,7 +160,7 @@ const Homepage = () => {
       console.log(theatre);
     }).catch((err) => {
       console.error(err);
-    })
+    }).finally(() => setLoading(false))
   },[])
 
   useEffect(() => {
@@ -166,20 +168,8 @@ const Homepage = () => {
       setPopular(res.data);
     }).catch((err) => {
       console.error();
-    })
+    }).finally(() => setLoading(false))
   },[])
-
-  useEffect(() => {
-    const email = sessionStorage.getItem("Email");
-    const name = sessionStorage.getItem("Name");
-    const mobile = sessionStorage.getItem("Mobile");
-    if(email && name && mobile){
-      const login = document.getElementById("login");
-      const signup = document.getElementById("signup");
-      login.style.display="none";
-      signup.style.display="none";
-    }
-  })
 
 
   const handleShowStandup = (category, show) => {
@@ -215,6 +205,12 @@ const Homepage = () => {
   const musicEventsContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
 
   const theatreContent = ['Movie 1', 'Movie 2', 'Movie 3', 'Movie 4'];
+
+  if(loading){
+    return (
+      <LottieLoading />
+    )
+  }
 
   return (
     <div className='homepage'>

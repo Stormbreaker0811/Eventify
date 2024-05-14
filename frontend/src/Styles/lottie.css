@@ -1,0 +1,10 @@
+.lottie-load{
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    text-align: center;
+    border: 1px solid black;
+}

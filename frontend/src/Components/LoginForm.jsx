@@ -34,11 +34,11 @@ const LoginForm = ({ toggleForm }) => {
     const [password, setPassword] = useState('');
     const [email,setEmail] = useState('');
     const [mobileNo,setMobileNo] = useState('');
-    const [formState,setFormState] = useState({
-        user_email:'',
-        user_password: '',
-        user_mobile: '',
-    });
+    // const [formState,setFormState] = useState({
+    //     user_email:'',
+    //     user_password: '',
+    //     user_mobile: '',
+    // });
 
     const [showModal , setShowModal] = useState(false);
 
@@ -67,22 +67,26 @@ const LoginForm = ({ toggleForm }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let formState = {}
         if(email.includes('@')){
-            setFormState({
+            formState = {
                 user_email: email,
                 user_password: password
-            })
+            }
+            console.log("email set");
         }else {
-            setFormState({
+            formState = {
                 user_mobile: email,
                 user_password: password
-            })
+            }
+            console.log("mobile set");
         }
         axios.post('/login',formState).then((res) => {
             if(res.status === 200){
                 sessionStorage.setItem("Email",res.data.Email);
                 sessionStorage.setItem("Name",res.data.Name);
-                sessionStorage.setItem("Mobile",res.data.Mobile)
+                sessionStorage.setItem("Mobile",res.data.Mobile);
+                sessionStorage.setItem("loginState","true");
                 window.location.href = "/";
             }else{
                 alert("User Not Found..//");
@@ -91,14 +95,6 @@ const LoginForm = ({ toggleForm }) => {
         }).catch((err) => {
             console.error(err);
         });
-    }
-
-    const handleToggleRegister = (e) => {
-        e.preventDefault();
-    }
-
-    const handleChange = (e) => {
-        e.preventDefault();
     }
 
     return (
