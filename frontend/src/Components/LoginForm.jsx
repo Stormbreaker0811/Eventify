@@ -51,6 +51,11 @@ const LoginForm = ({ toggleForm }) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
+            axios.post("/google-login",user)
+            sessionStorage.setItem("Email",user.email);
+            sessionStorage.setItem("Name",user.displayName);
+            sessionStorage.setItem("Mobile",user.phoneNumber);
+            sessionStorage.setItem("loginState","true");
         }).catch((err) => {
             const errorCode = err.code;
             const errorMessage = err.message;
@@ -100,7 +105,7 @@ const LoginForm = ({ toggleForm }) => {
     return (
         <div className="contain">
             <div className="login-container">
-                <div className="lottie">
+                <div className="lottie-login">
                     <Lottie animationData={animation} />
                 </div>
                 <form method="POST" onSubmit={handleSubmit}>

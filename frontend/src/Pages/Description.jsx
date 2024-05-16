@@ -54,6 +54,7 @@ import '../Styles/Description.css';
 import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import LottieLoading from '../Components/LottieLoading';
 
 const Description = () => {
   // Sample data for shows (replace it with actual data from MongoDB)
@@ -92,6 +93,10 @@ const Description = () => {
   //   // });
   //   setSelectedShow(show); // For demonstration, setting selected show directly
   // };
+
+  if(!show){
+    return <LottieLoading />
+  }
 
   return (
     <div className='desc'>

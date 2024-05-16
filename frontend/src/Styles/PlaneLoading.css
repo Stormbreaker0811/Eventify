@@ -1,0 +1,19 @@
+.planeLoading-container{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+.planeLoading{
+    width: 25%;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+}
+.landing-text p{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 20px;
+}

@@ -102,7 +102,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import Description from './Description';
-import LottieLoading from '../Components/LottieLoading';
+import PlaneLoading from '../Components/PlaneLoading';
 
 
 
@@ -137,6 +137,14 @@ const Homepage = () => {
   })
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    },5000);
+
+    return () => clearTimeout(timer);
+  },[]);
+
+  useEffect(() => {
     axios.get('/standup-homepage').then((res) => {
       setStandup(res.data);
       console.log(standup);
@@ -151,7 +159,8 @@ const Homepage = () => {
       console.log(music);
     }).catch((err) => {
       console.error(err);
-    }).finally(() => setLoading(false))
+    })
+    // .finally(() => setLoading(false))
 },[])
 
   useEffect(() => {
@@ -160,7 +169,8 @@ const Homepage = () => {
       console.log(theatre);
     }).catch((err) => {
       console.error(err);
-    }).finally(() => setLoading(false))
+    })
+    // .finally(() => setLoading(false))
   },[])
 
   useEffect(() => {
@@ -168,7 +178,8 @@ const Homepage = () => {
       setPopular(res.data);
     }).catch((err) => {
       console.error();
-    }).finally(() => setLoading(false))
+    })
+    // .finally(() => setLoading(false))
   },[])
 
 
@@ -182,7 +193,9 @@ const Homepage = () => {
       show_venue: show.venue,
       show_city: show.city,
       show_desc: show.desc,
-      show_poster: show.poster
+      show_poster: show.poster,
+      show_gold_price: show.gold_price,
+      show_platinum_price: show.platinum_price
       // ... other show details
     };
   
@@ -208,7 +221,7 @@ const Homepage = () => {
 
   if(loading){
     return (
-      <LottieLoading />
+      <PlaneLoading />
     )
   }
 

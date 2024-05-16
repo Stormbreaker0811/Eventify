@@ -1,10 +1,17 @@
 .lottie-load{
-    width: 100%;
+    max-width: 100%;
+}
+.lottie{
+    width: 30%;
     justify-content: center;
     position: relative;
     align-items: center;
     display: flex;
-    height: 100vh;
+    margin: 0 auto;
     text-align: center;
-    border: 1px solid black;
+}
+.loading-text p{
+    text-align: center;
+    justify-content: center;
+    font-size: 25px;
 }

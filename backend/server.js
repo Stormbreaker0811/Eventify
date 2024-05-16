@@ -69,8 +69,8 @@ const standup = new db.Schema({
     city: String,
     name: String,
     price: String,
-    gold_price: String,
-    platinum_price: String,
+    gold_price: Number,
+    platinum_price: Number,
     venue: String
 })
 
@@ -79,8 +79,8 @@ const theatre = new db.Schema({
     venue: String,
     date: String,
     price: String,
-    gold_price: String,
-    platinum_price: String,
+    gold_price: Number,
+    platinum_price: Number,
     city: String,
     poster: String
 })
@@ -90,8 +90,8 @@ const music = new db.Schema({
     venue: String,
     city: String,
     price: String,
-    gold_price: String,
-    platinum_price: String,
+    gold_price: Number,
+    platinum_price: Number,
     date: String,
     poster: String
 })
@@ -104,6 +104,12 @@ const movies = db.Schema({
     Poster_img: String
 });
 
+const orders = db.Schema({
+    _id: Number,
+    user_name: String,
+    order_number: String,
+    order_date: Date
+});
 
 const movie = db.model("Movies",movies);
 
@@ -115,7 +121,9 @@ const Theatre = db.model('Theatre', theatre);
 
 const Music = db.model("Music", music);
 
+const order = db.model("Orders",orders);
 
+let order_id_count = 0;
 
 app.post("/google-sign-in",async (req,res) => {
     const data = req.body;
@@ -125,8 +133,21 @@ app.post("/google-sign-in",async (req,res) => {
         Mobile: data.phoneNumber,
         Password: data.password.password
     })
-})
+    await User.create(user_data).then((doc) => {
+        return res.status(200).json(doc);
+    }).catch((err) => {
+        console.error(err);
+    })
+});
 
+app.post("/google-login", async (req,res) => {
+    const userData = req.body;
+    await User.findOne({Email: userData.email}).then((doc) => {
+        return res.status(200).json(doc);
+    }).catch((err) => {
+        console.error(err);
+    })
+})
 
 app.post('/add-standup',(req,res) => {
     const data = req.body;
@@ -191,6 +212,31 @@ app.post('/add-music',(req,res) => {
 
 })
 
+const request4DigitNumber = () => {
+    let number = Math.floor(1000 + Math.random() * 9000);
+    return number;
+}
+
+const getCurrentDate = () => {
+    let currentDate = new Date();
+    const year = currentDate.getFullYear();
+    
+}
+
+app.post('/post-order',async (req,res) => {
+    const user = req.body;
+    const currentDate = getCurrentDate();
+    await User.findOne({Email: user.email}).then((doc) => {
+        const new_order = new order({
+            _id: order_id_count,
+            user_name: doc.Name,
+            order_number: request4DigitNumber(),
+            order_date: currentDate
+        })
+        let prev_order_count = order_id_count;
+        order_id_count = prev_order_count+1;
+    })
+})
 
 app.post('/register' , (req,res) => {
     const data = req.body;
@@ -419,6 +465,10 @@ app.post('/posters', async (req,res) => {
         console.error(err);
     })
 });
+
+app.post('/payment',(req,res) => {
+
+})
 
 app.get('/', (req,res) => {
     res.status(200).send("Hello World!");
