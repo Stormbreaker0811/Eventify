@@ -9,6 +9,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const qr = require('qrcode');
 
 const firebaseConfig = {
     apiKey: "AIzaSyD1lQHPRVotGok9JFb3XCSGhORUT9E_hGg",
@@ -466,8 +467,18 @@ app.post('/posters', async (req,res) => {
     })
 });
 
-app.post('/payment',(req,res) => {
-
+app.post('/payments',(req,res) => {
+    const data = req.body;
+    const amount = data.Amount;
+    const upi_id = process.env.UPI_ID;
+    const upiString = `upi://pay?pa=${upi_id}&pn=Nimish Godbole&am=${amount}&cu=INR`;
+    qr.toDataURL(upiString , (err,url) => {
+        if(err){
+            res.status(500).send("QR Code Generation Fail..//");
+        }else{
+            res.json({ qrCodeUrl: url });
+        }
+    })
 })
 
 app.get('/', (req,res) => {

@@ -160,7 +160,7 @@ const Homepage = () => {
     }).catch((err) => {
       console.error(err);
     })
-    // .finally(() => setLoading(false))
+    .finally(() => setLoading(false))
 },[])
 
   useEffect(() => {
@@ -170,7 +170,7 @@ const Homepage = () => {
     }).catch((err) => {
       console.error(err);
     })
-    // .finally(() => setLoading(false))
+    .finally(() => setLoading(false))
   },[])
 
   useEffect(() => {
@@ -179,7 +179,7 @@ const Homepage = () => {
     }).catch((err) => {
       console.error();
     })
-    // .finally(() => setLoading(false))
+    .finally(() => setLoading(false))
   },[])
 
 

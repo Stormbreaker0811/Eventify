@@ -30,6 +30,11 @@ const BookTickets = () => {
           setPlatinumPrice(fetchedShow.platinum_price);
           console.log(platinumPrice)
         }
+        if((fetchedShow.gold_price === null || fetchedShow.gold_price === undefined) && (fetchedShow.platinum_price === null || fetchedShow.platinum_price === undefined)){
+          let finalGoldPrice = parseFloat(fetchedShow.price.replace('Rs. ','').trim());
+          setGoldPrice(finalGoldPrice);
+          setPlatinumPrice(finalGoldPrice + 200);
+        }
       })
       .catch((err) => {
         console.error(err);
