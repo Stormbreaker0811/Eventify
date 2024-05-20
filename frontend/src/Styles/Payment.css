@@ -1,7 +1,14 @@
-.pay{
+.pay-container{
     justify-content: center;
     text-align: center;
     font-size: 30px;
     font-weight: 500;
     margin-top: 300px;
+    text-align: center;
+}
+img{
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

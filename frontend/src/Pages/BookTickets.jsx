@@ -47,8 +47,13 @@ const BookTickets = () => {
   };
 
   const toggleBookingProcess = () => {
-    sessionStorage.setItem("Amount",ticketPrice);
-    window.location.href = "/payment";
+    if(sessionStorage.getItem('loginState') === null || sessionStorage.getItem('loginState') === undefined || sessionStorage.getItem('loginState') === ''){
+      alert('Please login to book Tickets.')
+    }
+    else{
+      sessionStorage.setItem("Amount",ticketPrice);
+      window.location.href = "/payment";
+    }
   }
 
 

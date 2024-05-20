@@ -254,7 +254,7 @@ const Homepage = () => {
       </div>
       <div className="standup">
         <h2>Standup Comedy</h2>
-        <SeeMore />
+        <Link to='/standup' className='seemore'><SeeMore /></Link>
         <div className="standup-content">
           {standup.map((show) => (
             <div key={show.id} className='st'>
@@ -282,7 +282,7 @@ const Homepage = () => {
       </div>
       <div className="music">
         <h2>Music events</h2>
-        <SeeMore />
+        <Link to='/music' className='seemore'><SeeMore /></Link>
         <div className="music-content">
         {music.map((show) => (
             <div key={show.id} className='st'>
@@ -310,7 +310,7 @@ const Homepage = () => {
       </div>
       <div className="theatre">
         <h2>Theatre</h2>
-        <SeeMore />
+        <Link to='/theatre' className='seemore'><SeeMore /></Link>
         <div className="theatre-content">
         {theatre.map((show) => (
             <div key={show.id} className='st'>

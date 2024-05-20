@@ -4,7 +4,7 @@ import '../Styles/SeeMore.css';
 const seemore = () => {
   return (
     <div className='sm'>
-      see more
+      <p className="see-more-text">See more</p>
     </div>
   )
 }

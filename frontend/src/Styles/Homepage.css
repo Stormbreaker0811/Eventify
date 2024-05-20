@@ -163,8 +163,10 @@
     margin-top: -50px;
   }
 
-
-
+  .seemore{
+    text-decoration: none;
+    color: black;
+  }
 
   .music{
     margin-top: 2%;

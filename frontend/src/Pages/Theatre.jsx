@@ -8,8 +8,9 @@ import axios from 'axios';
 const Theatre = () => {
     axios.defaults.baseURL = "http://localhost:4000"
 
-    const [selectedCity, setSelectedCity] = useState('');
+    const [selectedCity, setSelectedCity] = useState('Select');
     const [theatreShows, setTheatreShows] = useState([]);
+    const [filtered,setFiltered] = useState([])
 
     useEffect(() => {
         axios.post("/get-theatre")
@@ -20,6 +21,16 @@ const Theatre = () => {
             console.error(err);
         })
     }, []);
+
+    useEffect(() => {
+        setFiltered(theatreShows);
+        if(selectedCity === 'Select'){
+            setFiltered(theatreShows);
+        }else{
+            const filter = theatreShows.filter(show => show.city === selectedCity);
+            setFiltered(filter);
+        }
+    },[selectedCity,theatreShows])
 
     const handleCityChange = (event) => {
         setSelectedCity(event.target.value);
@@ -33,7 +44,7 @@ const Theatre = () => {
                 <div className="city-dropdown">
                     <label htmlFor="city">Select a city:</label>
                     <select id="city" value={selectedCity} onChange={handleCityChange}>
-                        <option value="">Select</option>
+                        <option value="Select">Select</option>
                         <option value="Pune">Pune</option>
                         <option value="Mumbai">Mumbai</option>
                         <option value="Chennai">Chennai</option>
@@ -51,7 +62,7 @@ const Theatre = () => {
             </div>
 
             <div className="theatre-shows">
-                {theatreShows.map((show) => (
+                {filtered.map((show) => (
                     <div className="show" key={show.id}>
                         <div className="poster">
                             <img src={show.poster} className='img-poster' alt="show poster" />
