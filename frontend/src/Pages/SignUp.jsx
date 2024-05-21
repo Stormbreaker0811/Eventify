@@ -80,7 +80,7 @@ const SignUp = ({ toggleForm }) => {
 
   return (
     <div className="signupform">
-      <div className="lottie">
+      <div className="lottie-login">
         <Lottie animationData={animation} />
       </div>
       <div className="signup-container">

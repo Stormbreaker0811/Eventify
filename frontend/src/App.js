@@ -20,6 +20,7 @@ import Forgotpass from './Components/Forgotpass';
 import ProfilePage from './Pages/ProfilePage';
 import LottieLoading from './Components/LottieLoading';
 import PlaneLoading from './Components/PlaneLoading';
+import Calendar from './Components/Calendar';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path='/music' element={<Music />}/>
           <Route path='/lottie' element={<LottieLoading />}/>
           <Route path='/plane' element={<PlaneLoading />}/>
+          <Route path='/calendar' element={<Calendar/>}/>
         </Routes>
       </BrowserRouter>
     </div>
