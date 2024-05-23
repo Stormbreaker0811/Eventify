@@ -5,14 +5,21 @@ import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LottieLoading from '../Components/LottieLoading';
+import { Alert, Backdrop } from '@mui/material';
+import { Button } from '@mui/material';
 
 const BookTickets = () => {
   const [ticketPrice, setTicketPrice] = useState(0);
   const [goldCount, setGoldCount] = useState(0);
   const [platinumCount, setPlatinumCount] = useState(0);
+  const [alert,setAlert] = useState(false);
 
   const [goldPrice, setGoldPrice] = useState(0);
   const [platinumPrice, setPlatinumPrice] = useState(0);
+
+  const handleClose = () => {
+    setAlert(false);
+  }
 
   const [show, setShow] = useState(null);
 
@@ -47,10 +54,10 @@ const BookTickets = () => {
   };
 
   const toggleBookingProcess = () => {
-    if(sessionStorage.getItem('loginState') === null || sessionStorage.getItem('loginState') === undefined || sessionStorage.getItem('loginState') === ''){
-      alert('Please login to book Tickets.')
+    if(sessionStorage.getItem('loginState') === null || sessionStorage.getItem('loginState') === undefined || sessionStorage.getItem('loginState') === '' || sessionStorage.getItem('loginState') === 'false'){
+      setAlert(true);
     }
-    else{
+    else if(sessionStorage.getItem("loginState") === "true"){
       sessionStorage.setItem("Amount",ticketPrice);
       window.location.href = "/payment";
     }
@@ -97,7 +104,7 @@ const BookTickets = () => {
           <h3>Cart</h3>
           <p>Total: Rs. {ticketPrice}</p>
         </div>
-        <Link to="/payments" className='payment-button' onClick={toggleBookingProcess}>Book</Link>
+        <button className='payment-button' onClick={toggleBookingProcess}>Book</button>
       </div>
       <div key={show.id} className='ticket-info'>
         <div className='event-poster'>
@@ -129,6 +136,13 @@ const BookTickets = () => {
           </div>
         </div>
       </div>
+      {alert && <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={alert}
+        onClick={handleClose}
+        >
+          <Alert severity='error' >Please Login to Book Tickets</Alert>
+        </Backdrop>}
       <Footer />
     </div>
   );

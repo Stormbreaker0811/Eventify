@@ -16,6 +16,15 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const toggleLogout = () => {
+    setIsLoggedIn(false);
+    sessionStorage.removeItem("Name");
+    sessionStorage.removeItem("Email");
+    sessionStorage.removeItem("Mobile");
+    sessionStorage.removeItem("loginState");
+    sessionStorage.removeItem("Amount");
+  }
+
   useEffect(() => {
     if(sessionStorage.getItem("loginState") === "true"){
       setIsLoggedIn(true);
@@ -53,7 +62,7 @@ const Navbar = () => {
                 <Link to="/orders" className="dropdown-link">Your Orders</Link>
                 <Link to="/add-event" className="dropdown-link" onClick={toggleCreateEvent}>Add an Event</Link>
                 <Link to="/theme" className="dropdown-link">Theme</Link>
-                <Link to="/logout" className="dropdown-link">Logout</Link>
+                <Link to="/login" className="dropdown-link" onClick={toggleLogout}>Logout</Link>
               </div>
             )}
           </div>

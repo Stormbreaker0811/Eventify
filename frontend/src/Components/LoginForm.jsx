@@ -1,7 +1,7 @@
 import React,{ useState,useContext, useEffect } from 'react';
 import Lottie, { LottiePlayer } from 'lottie-react';
 import app from '../firebase.init.js';
-import { getAuth, signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword} from 'firebase/auth';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import "react-phone-input-2/lib/style.css";
@@ -88,6 +88,7 @@ const LoginForm = ({ toggleForm }) => {
         }
         axios.post('/login',formState).then((res) => {
             if(res.status === 200){
+                const auth = getAuth()
                 sessionStorage.setItem("Email",res.data.Email);
                 sessionStorage.setItem("Name",res.data.Name);
                 sessionStorage.setItem("Mobile",res.data.Mobile);
