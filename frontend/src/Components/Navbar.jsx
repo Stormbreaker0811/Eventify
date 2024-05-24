@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import '../Styles/Navbar.css';
 import Logo from '../Assets/Logo.png';
 import { Link } from 'react-router-dom';
+import { IoMdClose } from "react-icons/io";
+import { MdOutlineMenu } from "react-icons/md";
 import Searchbar from './Searchbar';
 import MenuIcon from '../Assets/menu.png';
 import CreateEvent from '../Pages/CreateEvent'; 
@@ -11,8 +13,10 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCreateEventOpen, setIsCreateEventOpen] = useState(false); // State for Create Event overlay
   const [isLoggedIn,setIsLoggedIn] = useState(false);
+  const [menuIcon,setMenuIcon] = useState(true);
 
   const toggleMenu = () => {
+    setMenuIcon(!menuIcon);
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -55,7 +59,13 @@ const Navbar = () => {
             </>
           )}
           <div className="menu-container">
-            <img src={MenuIcon} className="menu-icon" alt="Menu" onClick={toggleMenu} />
+            {menuIcon ? (<>
+              <MdOutlineMenu className='menu-icon' onClick={toggleMenu} /> </>) 
+            : (
+              <>
+              <IoMdClose className='menu-icon' onClick={toggleMenu} />
+              </>
+            )}
             {isMenuOpen && (
               <div className="dropdown-menu">
                 <Link to="/profile" className="dropdown-link">Profile Settings</Link>

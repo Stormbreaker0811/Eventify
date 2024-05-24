@@ -49,13 +49,17 @@ const LoginForm = ({ toggleForm }) => {
         await signInWithPopup(auth,provider)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
             const user = result.user;
-            axios.post("/google-login",user)
-            sessionStorage.setItem("Email",user.email);
-            sessionStorage.setItem("Name",user.displayName);
-            sessionStorage.setItem("Mobile",user.phoneNumber);
-            sessionStorage.setItem("loginState","true");
+            axios.post("/google-login",user).then(async (res) => {
+                if(res.status === 200){
+                    const user_data = res.data;
+                    sessionStorage.setItem("Email",user_data.Email);
+                    sessionStorage.setItem("Name",user_data.Name);
+                    sessionStorage.setItem("Mobile",user_data.Mobile);
+                    sessionStorage.setItem("loginState","true");
+                    window.location.href = '/';
+                }
+            }).catch((err) => {console.error(err);});
         }).catch((err) => {
             const errorCode = err.code;
             const errorMessage = err.message;

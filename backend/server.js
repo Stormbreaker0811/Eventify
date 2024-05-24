@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const qr = require('qrcode');
+const { log } = require('console');
 
 const firebaseConfig = {
     apiKey: "AIzaSyD1lQHPRVotGok9JFb3XCSGhORUT9E_hGg",
@@ -105,11 +106,12 @@ const movies = db.Schema({
     Poster_img: String
 });
 
-const orders = db.Schema({
+const orders = new db.Schema({
     _id: Number,
     user_name: String,
     order_number: String,
-    order_date: Date
+    order_date: String,
+    event_name: String
 });
 
 const movie = db.model("Movies",movies);
@@ -122,9 +124,9 @@ const Theatre = db.model('Theatre', theatre);
 
 const Music = db.model("Music", music);
 
-const order = db.model("Orders",orders);
+const Order = db.model("Orders",orders);
 
-let order_id_count = 0;
+let order_id_count = 1;
 
 app.post("/google-sign-in",async (req,res) => {
     const data = req.body;
@@ -219,24 +221,61 @@ const request4DigitNumber = () => {
 }
 
 const getCurrentDate = () => {
-    let currentDate = new Date();
-    const year = currentDate.getFullYear();
-    
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${day}/${month}/${year}`;
+    return currentDate;
 }
 
-app.post('/post-order',async (req,res) => {
+app.post('/orders',async (req,res) => {
     const user = req.body;
+    console.log(user)
     const currentDate = getCurrentDate();
-    await User.findOne({Email: user.email}).then((doc) => {
-        const new_order = new order({
-            _id: order_id_count,
-            user_name: doc.Name,
-            order_number: request4DigitNumber(),
-            order_date: currentDate
-        })
-        let prev_order_count = order_id_count;
-        order_id_count = prev_order_count+1;
+    let name = "";
+    await User.findOne({Email: user.user_email}).then((doc) => {
+        name = doc.Name;
     })
+    const new_order = new Order({
+        _id: order_id_count,
+        user_name: name,
+        order_number: request4DigitNumber(),
+        order_date: currentDate,
+        event_name: user.event_name
+    })
+    let prev_order_count = order_id_count;
+    order_id_count = prev_order_count + 1;
+    await new_order.save().then(() => {
+        console.log("order added");
+        return res.status(200).send("Order Added..//");
+    }).catch((err) => {
+        console.error(err);
+    })
+})
+
+app.get('/get-orders',async (req,res) => {
+    const order_data = req.query.name;
+    console.log(order_data);
+    let event_name = "";
+    await Order.findOne({user_name: order_data}).then((doc) => {
+        event_name = doc.event_name;
+    }).catch((err) => {
+        console.error(err);
+    });
+    const standup = await Standup.findOne({name: event_name});
+    const music = await Music.findOne({name: event_name});
+    const theatre = await Theatre.findOne({name: event_name});
+    if(standup != null || standup != undefined){
+        console.log(standup);
+        return res.status(200).json(standup);
+    }else if(music != null || music != undefined){
+        console.log(music);
+        return res.status(200).json(music);
+    }else if(theatre != null || theatre != undefined){
+        console.log(theatre);
+        return res.status(200).json(theatre);
+    }
 })
 
 app.post('/register' , (req,res) => {
