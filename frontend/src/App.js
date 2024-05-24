@@ -21,6 +21,7 @@ import ProfilePage from './Pages/ProfilePage';
 import LottieLoading from './Components/LottieLoading';
 import PlaneLoading from './Components/PlaneLoading';
 import Calendar from './Components/Calendar';
+import AdminPage from './Pages/AdminPage';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path='/lottie' element={<LottieLoading />}/>
           <Route path='/plane' element={<PlaneLoading />}/>
           <Route path='/calendar' element={<Calendar/>}/>
+          <Route path='/admin' element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </div>
