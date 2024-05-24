@@ -57,7 +57,11 @@ const YourOrders = () => {
         params: {name}
       }).then((res) => {
         if(res.status === 200){
-          setMyOrders(res.data)
+          // setMyOrders(res.data)
+          // console.log(myOrders);
+          if(res.data){
+            setMyOrders(res.data);
+          }
         }
       }).catch((err) => {
         console.error(err);
